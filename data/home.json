@@ -1,0 +1,75 @@
+{
+    "hero": {
+        "rating": "4.8 rating",
+        "ratingNote": "from 120k viewers",
+        "title": "Big stories,",
+        "accent": "one minute at a time.",
+        "text": "Vertical drama series made for your phone and your sofa. Start any show free — no account needed.",
+        "primary": {
+            "label": "Start watching",
+            "href": "/browse"
+        },
+        "secondary": {
+            "label": "Get the app",
+            "href": "#app"
+        },
+        "stats": [
+            {
+                "value": "1,200+",
+                "label": "episodes"
+            },
+            {
+                "value": "90s",
+                "label": "per episode"
+            },
+            {
+                "value": "Free",
+                "label": "first episodes"
+            }
+        ],
+        "chips": {
+            "unlocked": "Episode 12 unlocked",
+            "continue": "Continue watching",
+            "progress": "Ep 7 · 1:12 left",
+            "viewers": "18.4k watching now",
+            "next": "Up next"
+        },
+        "phone": {
+            "time": "9:41",
+            "episode": "EP 12",
+            "total": "/ 60",
+            "likes": "128k",
+            "comments": "2.4k",
+            "save": "Save",
+            "share": "Share",
+            "tags": ["Romance", "Contract marriage"],
+            "synopsis": "She signed a one-year marriage to save her family's company…",
+            "episodes": "Episodes 1–60",
+            "next": "Next"
+        }
+    },
+    "install": {
+        "title": "Take it with you.",
+        "accent": "Get FeelReels on any screen.",
+        "text": "Download FeelReels for iPhone or Android, or install it straight from your browser on any laptop.",
+        "notification": {
+            "app": "FeelReels",
+            "time": "now",
+            "title": "New episode is out",
+            "text": "Episode 13 of The Contract Bride just dropped. Pick up where you left off."
+        }
+    },
+    "genres": {
+        "eyebrow": "Genres",
+        "title": "Pick a mood.",
+        "accent": "We'll handle the cliffhangers.",
+        "cta": "Browse all series",
+        "count": "{count} series"
+    },
+    "trending": {
+        "eyebrow": "Trending",
+        "title": "What everyone is watching",
+        "cta": "See all"
+    },
+    "marquee": ["Romance", "Revenge", "Billionaire", "Thriller", "Fantasy", "Family", "Drama"]
+}

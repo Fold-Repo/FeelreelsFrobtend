@@ -1,0 +1,87 @@
+{
+    "play": "Play",
+    "pause": "Pause",
+    "mute": "Mute",
+    "unmute": "Unmute",
+    "volume": "Volume",
+    "back": "Back 10 seconds",
+    "forward": "Forward 10 seconds",
+    "seek": "Seek",
+    "theater": "Theater mode",
+    "exitTheater": "Exit theater mode",
+    "fullscreen": "Full screen",
+    "exitFullscreen": "Exit full screen",
+    "next": "Next episode",
+    "settings": "Settings",
+    "captions": "Subtitles",
+    "episodes": "Episodes",
+    "speed": "Playback speed",
+    "quality": "Quality",
+    "normal": "Normal",
+    "on": "On",
+    "off": "Off",
+    "auto": "Auto",
+    "speeds": [0.5, 0.75, 1, 1.25, 1.5, 2],
+    "qualities": ["Auto", "1080p", "720p", "480p"],
+    "seconds": "{count}s",
+    "upNext": {
+        "title": "Up next",
+        "countdown": "Playing in {seconds}s",
+        "playNow": "Play now",
+        "cancel": "Cancel"
+    },
+    "shortcuts": {
+        "title": "Keyboard shortcuts",
+        "items": [
+            {
+                "keys": "Space / K",
+                "label": "Play or pause"
+            },
+            {
+                "keys": "J / L",
+                "label": "Back or forward 10s"
+            },
+            {
+                "keys": "← / →",
+                "label": "Back or forward 5s"
+            },
+            {
+                "keys": "↑ / ↓",
+                "label": "Volume"
+            },
+            {
+                "keys": "M",
+                "label": "Mute"
+            },
+            {
+                "keys": "F",
+                "label": "Full screen"
+            },
+            {
+                "keys": "T",
+                "label": "Theater mode"
+            },
+            {
+                "keys": "C",
+                "label": "Subtitles"
+            },
+            {
+                "keys": "N",
+                "label": "Next episode"
+            },
+            {
+                "keys": "< / >",
+                "label": "Speed"
+            }
+        ]
+    },
+    "captionLines": [
+        "You signed the contract. You don't get to back out now.",
+        "I never said I would. I said I wouldn't fall for you.",
+        "Then why are you still here?",
+        "Because your grandmother is watching from the window.",
+        "One year. That's all this is.",
+        "Then stop looking at me like that."
+    ],
+    "tapToUnmute": "Tap to unmute"
+}

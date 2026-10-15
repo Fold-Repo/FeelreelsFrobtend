@@ -1,0 +1,53 @@
+{
+    "title": "Settings",
+    "text": "Manage your account, membership and how episodes play.",
+    "account": {
+        "title": "Account",
+        "guestTitle": "Guest account",
+        "guestText": "We created this account for this device so you can watch without signing up.",
+        "deviceId": "Device ID",
+        "signIn": "Sign in to sync",
+        "signedInAs": "Signed in as",
+        "signOut": "Sign out"
+    },
+    "membership": {
+        "title": "Membership",
+        "vipActive": "VIP is active",
+        "vipInactive": "Free plan",
+        "vipText": "VIP opens every episode with no ads.",
+        "goVip": "Go VIP",
+        "cancelVip": "Cancel VIP",
+        "tokens": "Token balance",
+        "topUp": "Add 10 tokens",
+        "unlocked": "Episodes unlocked",
+        "toastVip": "VIP is now active",
+        "toastCancel": "VIP cancelled",
+        "toastTokens": "10 tokens added"
+    },
+    "playback": {
+        "title": "Playback",
+        "autoplay": "Autoplay next episode",
+        "autoplayText": "Start the next episode when one ends.",
+        "subtitles": "Show subtitles",
+        "subtitlesText": "Display captions when they're available.",
+        "dataSaver": "Data saver",
+        "dataSaverText": "Stream at a lower quality on mobile data.",
+        "quality": "Default quality",
+        "qualities": [
+            { "label": "Auto", "value": "auto" },
+            { "label": "1080p", "value": "1080" },
+            { "label": "720p", "value": "720" },
+            { "label": "480p", "value": "480" }
+        ]
+    },
+    "app": {
+        "title": "App",
+        "text": "Install FeelReels to open it in its own window."
+    },
+    "device": {
+        "title": "This device",
+        "text": "Clear your guest account, unlocks and history from this browser.",
+        "reset": "Reset this device",
+        "toast": "This device has been reset"
+    }
+}

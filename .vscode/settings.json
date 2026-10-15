@@ -1,0 +1,46 @@
+{
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+    },
+    // "editor.rulers": [160],
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+    "editor.tabSize": 4,
+    "editor.detectIndentation": false,
+    "editor.guides.highlightActiveIndentation": true,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.renderWhitespace": "none",
+    "editor.renderLineHighlight": "line",
+    "editor.wordWrap": "on",
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "editor.guides.bracketPairsHorizontal": false,
+    "editor.wrappingIndent": "indent",
+    "importCost.showCalculatingDecoration": false,
+    "indentRainbow.indicatorStyle": "light",
+    "indentRainbow.lightIndicatorStyleLineWidth": 1,
+    "indentRainbow.colors": ["rgba(0,0,0,0)"],
+    "indentRainbow.errorColor": "rgba(0,0,0,0)",
+    "indentRainbow.tabmixColor": "rgba(0,0,0,0)",
+    "indentRainbow.excludedLanguages": ["plaintext"],
+    "editor.guides.indentation": true,
+    "editor.guides.bracketPairs": false
+}

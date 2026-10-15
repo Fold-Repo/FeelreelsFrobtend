@@ -1,0 +1,58 @@
+{
+    "title": "Install {name}",
+    "body": "Open it from your home screen like an app. Full screen, fast, no app store needed.",
+    "install": "Install",
+    "later": "Not now",
+    "howTo": "Show me how",
+    "done": "Got it",
+    "close": "Close",
+    "guideTitle": "Add {name} to your home screen",
+    "guides": {
+        "ios-safari": [
+            "Tap the Share button {share} at the bottom of Safari.",
+            "Scroll down and tap “Add to Home Screen” {add}.",
+            "Tap “Add” in the top-right corner."
+        ],
+        "ios-other": ["Tap the Share button {share} in the address bar.", "Scroll down and tap “Add to Home Screen” {add}.", "Tap “Add” to finish."],
+        "android": ["Open the browser menu {menu} (top-right).", "Tap “Install app” or “Add to Home screen”.", "Tap “Install” to confirm."],
+        "desktop": [
+            "Click the install icon {install} at the right of the address bar.",
+            "Or open the browser menu {menu} and choose “Install {name}…”.",
+            "Click “Install”."
+        ],
+        "mac-safari": ["In the menu bar, open File.", "Choose “Add to Dock…”.", "Click “Add”."]
+    },
+    "store": {
+        "title": "Get the FeelReels app",
+        "text": "Watch offline, get new-episode alerts and keep your unlocks on every device.",
+        "appStore": {
+            "label": "Download on the",
+            "name": "App Store",
+            "href": "#"
+        },
+        "playStore": {
+            "label": "Get it on",
+            "name": "Google Play",
+            "href": "#"
+        },
+        "or": "or",
+        "web": "Put it on your phone",
+        "webText": "No store needed — add FeelReels to your home screen in three taps.",
+        "rating": "4.8 · 120k ratings",
+        "platforms": [
+            {
+                "label": "iPhone",
+                "value": "ios-safari"
+            },
+            {
+                "label": "Android",
+                "value": "android"
+            },
+            {
+                "label": "Desktop",
+                "value": "desktop"
+            }
+        ],
+        "installNow": "Install now"
+    }
+}

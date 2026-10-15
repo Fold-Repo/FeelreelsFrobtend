@@ -1,0 +1,119 @@
+{
+    "name": "FeelReels",
+    "description": "Short drama series you can finish on a coffee break. The first episodes of every show are free.",
+    "twitter": "@feelreels",
+    "nav": [
+        {
+            "label": "Home",
+            "href": "/"
+        },
+        {
+            "label": "Browse",
+            "href": "/browse"
+        },
+        {
+            "label": "New releases",
+            "href": "/browse?sort=newest"
+        },
+        {
+            "label": "Genres",
+            "href": "/#genres"
+        }
+    ],
+    "actions": {
+        "signIn": "Sign in",
+        "settings": "Settings",
+        "guest": "Guest",
+        "vip": "VIP",
+        "tokens": "{count} tokens",
+        "menu": "Open menu",
+        "closeMenu": "Close menu",
+        "start": "Start watching",
+        "getApp": "Get the app"
+    },
+    "footer": {
+        "tagline": "Stories that hook you in a minute and keep you for the night.",
+        "columns": [
+            {
+                "title": "Watch",
+                "links": [
+                    {
+                        "label": "Browse all",
+                        "href": "/browse"
+                    },
+                    {
+                        "label": "Trending",
+                        "href": "/browse?sort=popular"
+                    },
+                    {
+                        "label": "New releases",
+                        "href": "/browse?sort=newest"
+                    }
+                ]
+            },
+            {
+                "title": "Account",
+                "links": [
+                    {
+                        "label": "Sign in",
+                        "href": "/login"
+                    },
+                    {
+                        "label": "Settings",
+                        "href": "/settings"
+                    },
+                    {
+                        "label": "My List",
+                        "href": "/browse?list=saved"
+                    }
+                ]
+            },
+            {
+                "title": "Help",
+                "links": [
+                    {
+                        "label": "Terms",
+                        "href": "#"
+                    },
+                    {
+                        "label": "Privacy",
+                        "href": "#"
+                    },
+                    {
+                        "label": "Contact",
+                        "href": "#"
+                    }
+                ]
+            }
+        ],
+        "installTitle": "Get the app",
+        "installText": "Install FeelReels on your desktop or phone. No store needed.",
+        "copyright": "© FeelReels. All rights reserved."
+    },
+    "socials": [],
+    "labels": {
+        "skipToContent": "Skip to content",
+        "loadMore": "Loading more",
+        "loadMoreError": "Couldn't load more.",
+        "retry": "Try again",
+        "showPassword": "Show password",
+        "hidePassword": "Hide password",
+        "scrollLeft": "Scroll left",
+        "scrollRight": "Scroll right",
+        "episodes": "{count} episodes",
+        "free": "Free",
+        "vip": "VIP",
+        "new": "New",
+        "views": "{count} views",
+        "install": "Install app",
+        "installed": "App installed",
+        "installHint": "Use your browser menu and choose “Add to Home Screen” or “Install”.",
+        "copied": "Copied",
+        "copy": "Copy",
+        "timeAgo": {
+            "day": "{count}d ago",
+            "month": "{count}mo ago",
+            "today": "Today"
+        }
+    }
+}

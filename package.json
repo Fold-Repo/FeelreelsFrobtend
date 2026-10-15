@@ -1,26 +1,44 @@
 {
-  "name": "feelreels",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
-  },
-  "dependencies": {
-    "next": "16.4.1",
-    "react": "19.3.0",
-    "react-dom": "19.3.0"
-  },
-  "devDependencies": {
-    "@tailwindcss/turbopack": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.4.1",
-    "tailwindcss": "^4",
-    "typescript": "^5"
-  }
+    "name": "feelreels",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "eslint",
+        "lint:fix": "eslint --fix && npm run format",
+        "format": "node scripts/format-classes.mjs && node scripts/format-jsx-spacing.mjs && prettier --write . --log-level warn",
+        "format:check": "prettier --check .",
+        "check": "prettier --check . && eslint && tsc --noEmit"
+    },
+    "dependencies": {
+        "@heroui/react": "^3.2.6",
+        "@heroui/styles": "^3.2.6",
+        "@tanstack/react-query": "^5.104.3",
+        "clsx": "^2.1.1",
+        "framer-motion": "^14.3.0",
+        "lenis": "^1.3.27",
+        "lucide-react": "^1.57.0",
+        "next": "16.4.1",
+        "react": "19.3.0",
+        "react-dom": "19.3.0",
+        "react-icons": "^5.7.0",
+        "tailwind-merge": "^3.7.0"
+    },
+    "devDependencies": {
+        "@stylistic/eslint-plugin": "^5.10.0",
+        "@tailwindcss/turbopack": "^4",
+        "@types/node": "^20",
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
+        "eslint": "^9",
+        "eslint-config-next": "16.4.1",
+        "eslint-config-prettier": "^10.1.8",
+        "eslint-plugin-better-tailwindcss": "^4.9.1",
+        "prettier": "^3.9.10",
+        "prettier-plugin-tailwindcss": "^0.8.1",
+        "tailwindcss": "^4",
+        "typescript": "^5"
+    }
 }

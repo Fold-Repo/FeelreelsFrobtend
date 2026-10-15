@@ -1,0 +1,63 @@
+{
+    "title": "Recommended for you",
+    "titles": {
+        "popular": "Trending now",
+        "newest": "New releases",
+        "rating": "Top rated",
+        "episodes": "Longest series",
+        "saved": "My List",
+        "continue": "Continue watching",
+        "search": "Results for “{q}”",
+        "studio": "From {studio}"
+    },
+    "all": "All",
+    "results": "{count} series",
+    "sortLabel": "Sort by",
+    "sorts": [
+        {
+            "label": "Recommended",
+            "value": ""
+        },
+        {
+            "label": "Most viewed",
+            "value": "popular"
+        },
+        {
+            "label": "Newest",
+            "value": "newest"
+        },
+        {
+            "label": "Top rated",
+            "value": "rating"
+        },
+        {
+            "label": "Most episodes",
+            "value": "episodes"
+        }
+    ],
+    "filters": [
+        {
+            "label": "New",
+            "value": "new"
+        },
+        {
+            "label": "VIP",
+            "value": "vip"
+        },
+        {
+            "label": "Completed",
+            "value": "completed"
+        },
+        {
+            "label": "10+ free episodes",
+            "value": "free"
+        }
+    ],
+    "clear": "Clear filters",
+    "empty": "No series match these filters.",
+    "emptyList": "Nothing here yet. Start a series and it will show up here.",
+    "end": "That's everything for now.",
+    "genresLabel": "Genres",
+    "filtersLabel": "Filters",
+    "studiosLabel": "Studios"
+}

@@ -1,0 +1,5 @@
+export { default as AuthLayout } from './AuthLayout'
+export { ForgotForm as ForgotPasswordView } from './components/ForgotForm'
+export { LoginForm as LoginView } from './components/LoginForm'
+export { ResetForm as ResetPasswordView } from './components/ResetForm'
+export { VerifyForm as VerifyView } from './components/VerifyForm'

@@ -1,0 +1,59 @@
+{
+    "search": {
+        "placeholder": "Search series, genres, studios…",
+        "label": "Search",
+        "clear": "Clear search",
+        "close": "Close search"
+    },
+    "menu": "Toggle menu",
+    "main": [
+        {
+            "label": "Home",
+            "href": "/browse",
+            "icon": "home"
+        },
+        {
+            "label": "Trending",
+            "href": "/browse?sort=popular",
+            "icon": "flame"
+        },
+        {
+            "label": "New releases",
+            "href": "/browse?sort=newest",
+            "icon": "sparkles"
+        },
+        {
+            "label": "Top rated",
+            "href": "/browse?sort=rating",
+            "icon": "star"
+        }
+    ],
+    "library": [
+        {
+            "label": "Continue watching",
+            "href": "/browse?list=continue",
+            "icon": "history"
+        },
+        {
+            "label": "My List",
+            "href": "/browse?list=saved",
+            "icon": "bookmark"
+        },
+        {
+            "label": "Top up",
+            "href": "/settings",
+            "icon": "coins"
+        }
+    ],
+    "libraryTitle": "Library",
+    "download": "Download App",
+    "backToSite": "FeelReels home",
+    "showAll": "Show all {count}",
+    "showLess": "Show less",
+    "continueTitle": "Continue watching",
+    "popularTitle": "Popular now",
+    "episodeShort": "Ep {number} of {count}",
+    "seeAll": "See all",
+    "episodeBadge": "EP {number}",
+    "remaining": "{count} episodes left"
+}

@@ -1,0 +1,13 @@
+{
+    "recommendations": [
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "bradlc.vscode-tailwindcss",
+        "usernamehw.errorlens",
+        "yoavbls.pretty-ts-errors",
+        "streetsidesoftware.code-spell-checker",
+        "mikestead.dotenv",
+        "oderwat.indent-rainbow"
+    ],
+    "unwantedRecommendations": ["rvest.vs-code-prettier-eslint", "bourhaouta.tailwindshades"]
+}

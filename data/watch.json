@@ -1,0 +1,194 @@
+{
+    "back": "Back",
+    "episodes": "Episodes",
+    "episode": "Episode {number}",
+    "nowPlaying": "Now playing",
+    "about": "About this series",
+    "moreLikeThis": "More like this",
+    "freeNote": "Episodes 1–{count} are free",
+    "player": {
+        "play": "Play",
+        "pause": "Pause",
+        "mute": "Mute",
+        "unmute": "Unmute",
+        "theater": "Theater mode",
+        "exitTheater": "Exit theater mode",
+        "fullscreen": "Full screen",
+        "exitFullscreen": "Exit full screen",
+        "next": "Next episode",
+        "seek": "Seek"
+    },
+    "locked": {
+        "title": "Episode {number} is locked",
+        "text": "Pick how you'd like to keep watching.",
+        "ad": "Watch an ad to unlock",
+        "token": "Use 1 token",
+        "tokenBalance": "You have {count}",
+        "noTokens": "No tokens left",
+        "vip": "Unlock everything with VIP",
+        "signIn": "Sign in to keep your unlocks on every device"
+    },
+    "ad": {
+        "title": "Your episode starts after this ad",
+        "sponsor": "Sponsored",
+        "countdown": "Skip in {seconds}s",
+        "done": "Continue to episode",
+        "placeholder": "Ad space"
+    },
+    "toasts": {
+        "unlockedAd": "Episode unlocked",
+        "unlockedToken": "Episode unlocked with a token",
+        "vip": "Welcome to VIP — every episode is open"
+    },
+    "views": "{count} views",
+    "follow": "Add to My List",
+    "following": "In My List",
+    "like": "Like",
+    "comments": "Comments",
+    "share": "Share",
+    "shared": "Link copied",
+    "related": "Up next",
+    "tabs": {
+        "episodes": "Episodes",
+        "related": "Related"
+    },
+    "showMore": "Show more",
+    "showLess": "Show less",
+    "series": "{count} episodes · {studio}",
+    "shareModal": {
+        "title": "Share this series",
+        "text": "Send it to someone who needs a new obsession.",
+        "copy": "Copy link",
+        "copied": "Link copied",
+        "more": "More",
+        "message": "Watch “{title}” on FeelReels — episode {episode} is a must-see.",
+        "targets": ["whatsapp", "x", "facebook", "telegram", "reddit", "email"],
+        "labels": {
+            "whatsapp": "WhatsApp",
+            "x": "X",
+            "facebook": "Facebook",
+            "telegram": "Telegram",
+            "reddit": "Reddit",
+            "email": "Email"
+        }
+    },
+    "commentsPanel": {
+        "title": "Comments",
+        "count": "{count} Comments",
+        "placeholder": "Add a comment…",
+        "replyPlaceholder": "Add a reply…",
+        "post": "Comment",
+        "reply": "Reply",
+        "cancel": "Cancel",
+        "you": "You",
+        "guest": "Guest",
+        "justNow": "just now",
+        "like": "Like",
+        "dislike": "Dislike",
+        "readMore": "Read more",
+        "showLess": "Show less",
+        "replies": "{count} replies",
+        "oneReply": "1 reply",
+        "hideReplies": "Hide replies",
+        "pinned": "Pinned by {studio}",
+        "creatorHeart": "Liked by the creator",
+        "sortBy": "Sort by",
+        "sorts": [
+            {
+                "label": "Top comments",
+                "value": "top"
+            },
+            {
+                "label": "Newest first",
+                "value": "newest"
+            }
+        ],
+        "close": "Close comments",
+        "guestHint": "Commenting as a guest on this device.",
+        "samples": [
+            {
+                "id": "c1",
+                "name": "Amaka O.",
+                "handle": "@amakawatches",
+                "time": "2h ago",
+                "text": "Episode 12 had me screaming. Why does he always show up right when she's about to leave? The writers know exactly what they're doing with these cliffhangers and I'm not okay.",
+                "likes": 482,
+                "pinned": true,
+                "heart": true,
+                "replies": [
+                    {
+                        "id": "c1r1",
+                        "name": "Daniel",
+                        "handle": "@dan.reels",
+                        "time": "1h ago",
+                        "text": "The timing is always perfect. I paused and screamed too.",
+                        "likes": 41
+                    },
+                    {
+                        "id": "c1r2",
+                        "name": "Ife",
+                        "handle": "@ifeloves",
+                        "time": "58m ago",
+                        "text": "Wait until episode 20. That's all I'll say.",
+                        "likes": 63
+                    }
+                ]
+            },
+            {
+                "id": "c2",
+                "name": "Jordan",
+                "handle": "@jordanp",
+                "time": "5h ago",
+                "text": "The grandmother is the real main character and I will not be taking questions.",
+                "likes": 311,
+                "replies": [
+                    {
+                        "id": "c2r1",
+                        "name": "Mara",
+                        "handle": "@marareads",
+                        "time": "4h ago",
+                        "text": "Her one-liners carry the whole show.",
+                        "likes": 28
+                    }
+                ]
+            },
+            {
+                "id": "c3",
+                "name": "Lina K.",
+                "handle": "@linak",
+                "time": "1 day ago",
+                "text": "Binged 30 episodes on my lunch break. No regrets.",
+                "likes": 198,
+                "replies": []
+            },
+            {
+                "id": "c4",
+                "name": "Tobi",
+                "handle": "@tobiwrites",
+                "time": "2 days ago",
+                "text": "That contract scene was so well acted. More of this please.",
+                "likes": 87,
+                "heart": true,
+                "replies": []
+            },
+            {
+                "id": "c5",
+                "name": "Sofia",
+                "handle": "@sofiaaa",
+                "time": "3 days ago",
+                "text": "Anyone else rewatch the rooftop episode three times?",
+                "likes": 54,
+                "replies": [
+                    {
+                        "id": "c5r1",
+                        "name": "Kemi",
+                        "handle": "@kemi.o",
+                        "time": "3 days ago",
+                        "text": "Four times. Don't judge me.",
+                        "likes": 12
+                    }
+                ]
+            }
+        ]
+    }
+}
