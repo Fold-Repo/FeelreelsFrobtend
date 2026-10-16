@@ -80,7 +80,7 @@ export function VideoPlayer({
             onMouseLeave={() => state.playing && actions.poke()}
             className={cn(
                 'relative isolate overflow-hidden bg-black text-white select-none',
-                state.fullscreen ? 'h-screen w-screen' : theater ? 'h-[min(78vh,60rem)] w-full' : 'aspect-video w-full rounded-3xl',
+                state.fullscreen ? 'h-dvh w-screen' : theater ? 'h-[min(78vh,60rem)] w-full' : 'aspect-[4/3] w-full sm:aspect-video sm:rounded-3xl',
                 chromeHidden && 'cursor-none',
             )}>
             <ProtectedVideo

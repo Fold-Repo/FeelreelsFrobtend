@@ -38,13 +38,13 @@ export function Genres() {
                         const { count } = category
 
                         return (
-                            <GenreReveal key={category.slug} index={index} className={cn(index === 0 && 'col-span-2 row-span-2')}>
+                            <GenreReveal key={category.slug} index={index} className={cn(index === 0 && 'col-span-2 lg:row-span-2')}>
                                 <Link
                                     href={`/browse?category=${category.slug}`}
                                     className={cn(
-                                        'group relative flex h-full min-h-44 flex-col overflow-hidden rounded-[1.75rem] p-5',
-                                        TINTS[index],
-                                        index === 0 && 'min-h-80 sm:min-h-[22rem]',
+                                        'group relative flex h-full min-h-36 flex-col overflow-hidden rounded-[1.75rem] p-5 sm:min-h-44',
+                                        TINTS[index % TINTS.length],
+                                        index === 0 && 'min-h-52 lg:min-h-[22rem]',
                                     )}>
                                     <span className="relative z-10 text-lg font-semibold tracking-[-0.02em]">{category.label}</span>
 
@@ -60,7 +60,7 @@ export function Genres() {
                                                 key={series.slug}
                                                 className={cn(
                                                     'relative aspect-[2/3] overflow-hidden rounded-2xl shadow-lg transition-transform duration-700 group-hover:-translate-y-2',
-                                                    index === 0 ? 'w-36 sm:w-44' : 'w-20',
+                                                    index === 0 ? 'w-24 lg:w-44' : 'w-16 sm:w-20',
                                                     item === 0 ? '-rotate-6' : 'rotate-3',
                                                 )}>
                                                 <Image src={series.poster} alt="" fill sizes="180px" className="object-cover" />

@@ -29,23 +29,23 @@ export function LockedOverlay({ series, episode }: { series: Series; episode: Ep
     }
 
     return (
-        <div className="absolute inset-0 flex items-center justify-center p-4">
+        <div className="absolute inset-0 flex items-center justify-center p-2 sm:p-4">
             <Image src={series.poster} alt="" fill sizes="800px" className="scale-110 object-cover opacity-40 blur-2xl" />
 
             <motion.div
                 initial={{ opacity: 0, y: 20, scale: 0.97 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.6, ease: EASE }}
-                className="relative w-full max-w-sm rounded-[1.75rem] bg-surface/95 p-5 text-ink shadow-2xl backdrop-blur-xl">
-                <span className="flex size-11 items-center justify-center rounded-full bg-primary text-on-primary">
+                className="relative max-h-full w-full max-w-sm overflow-y-auto rounded-2xl bg-surface/95 p-3 text-ink shadow-2xl backdrop-blur-xl sm:rounded-[1.75rem] sm:p-5">
+                <span className="hidden size-11 items-center justify-center rounded-full bg-primary text-on-primary sm:flex">
                     <Lock className="size-4" />
                 </span>
 
-                <h3 className="mt-4 text-xl font-semibold tracking-[-0.02em]">{interpolate(labels.title, { number: episode.number })}</h3>
+                <h3 className="text-base font-semibold tracking-[-0.02em] sm:mt-4 sm:text-xl">{interpolate(labels.title, { number: episode.number })}</h3>
 
-                <p className="mt-1 text-sm text-muted">{labels.text}</p>
+                <p className="mt-1 hidden text-sm text-muted sm:block">{labels.text}</p>
 
-                <div className="mt-5 space-y-2">
+                <div className="mt-2 space-y-1.5 sm:mt-5 sm:space-y-2">
                     <UnlockOption icon={<Play className="size-4 fill-current" />} title={labels.ad} tone="bg-blush" onClick={() => setAdOpen(true)} />
 
                     <UnlockOption
@@ -61,7 +61,7 @@ export function LockedOverlay({ series, episode }: { series: Series; episode: Ep
                 </div>
 
                 {!viewer.user && (
-                    <Link href="/login" className="mt-4 block text-center text-xs text-muted underline-offset-4 hover:underline">
+                    <Link href="/login" className="mt-4 hidden text-center text-xs text-muted underline-offset-4 hover:underline sm:block">
                         {labels.signIn}
                     </Link>
                 )}

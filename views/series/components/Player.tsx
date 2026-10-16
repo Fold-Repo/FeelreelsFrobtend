@@ -33,7 +33,7 @@ export function Player({ series, episodes, current, theater, onSelect, onToggleT
                 className={
                     theater
                         ? 'relative h-[min(78vh,60rem)] w-full overflow-hidden bg-black'
-                        : 'relative aspect-video w-full overflow-hidden rounded-3xl bg-black'
+                        : 'relative aspect-[4/3] w-full overflow-hidden bg-black sm:aspect-video sm:rounded-3xl'
                 }>
                 <LockedOverlay series={series} episode={episode} />
             </div>

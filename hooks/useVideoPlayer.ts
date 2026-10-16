@@ -26,11 +26,16 @@ export function useVideoPlayer(src: string) {
     const buffered = fresh ? timing.buffered : 0
 
     useEffect(() => {
-        const onChange = () => setFullscreen(Boolean(document.fullscreenElement))
+        const doc = document as Document & { webkitFullscreenElement?: Element }
+        const onChange = () => setFullscreen(Boolean(doc.fullscreenElement || doc.webkitFullscreenElement))
 
         document.addEventListener('fullscreenchange', onChange)
+        document.addEventListener('webkitfullscreenchange', onChange)
 
-        return () => document.removeEventListener('fullscreenchange', onChange)
+        return () => {
+            document.removeEventListener('fullscreenchange', onChange)
+            document.removeEventListener('webkitfullscreenchange', onChange)
+        }
     }, [])
 
     useEffect(() => {
@@ -87,8 +92,32 @@ export function useVideoPlayer(src: string) {
     }, [])
 
     const toggleFullscreen = useCallback(() => {
-        if (document.fullscreenElement) void document.exitFullscreen()
-        else void stageRef.current?.requestFullscreen?.()
+        type WebkitVideo = HTMLVideoElement & { webkitEnterFullscreen?: () => void }
+        type WebkitStage = HTMLDivElement & { webkitRequestFullscreen?: () => Promise<void> }
+        type OrientationLock = ScreenOrientation & { lock?: (orientation: string) => Promise<void> }
+
+        const doc = document as Document & { webkitFullscreenElement?: Element; webkitExitFullscreen?: () => Promise<void> }
+        const stage = stageRef.current as WebkitStage | null
+        const video = videoRef.current as WebkitVideo | null
+
+        if (doc.fullscreenElement || doc.webkitFullscreenElement) {
+            void (doc.exitFullscreen ?? doc.webkitExitFullscreen)?.call(doc)
+
+            return
+        }
+
+        const request = stage?.requestFullscreen ?? stage?.webkitRequestFullscreen
+
+        if (stage && request) {
+            void request
+                .call(stage)
+                .then(() => (screen.orientation as OrientationLock | undefined)?.lock?.('landscape'))
+                .catch(() => video?.webkitEnterFullscreen?.())
+
+            return
+        }
+
+        video?.webkitEnterFullscreen?.()
     }, [])
 
     const sync = (event: SyntheticEvent<HTMLVideoElement>) => {

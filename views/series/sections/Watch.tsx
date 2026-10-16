@@ -37,14 +37,14 @@ export function Watch({ series }: { series: Series }) {
     )
 
     return (
-        <div className={cn('pb-16', !theater && 'px-4 pt-6 sm:px-6')}>
+        <div className={cn('pb-16', !theater && 'sm:px-6 sm:pt-6')}>
             {theater && (
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, ease: EASE }} className="bg-black">
                     {player}
                 </motion.div>
             )}
 
-            <div className={cn('grid gap-6 xl:grid-cols-[minmax(0,1fr)_24rem]', theater && 'px-4 pt-6 sm:px-6')}>
+            <div className={cn('grid gap-6 xl:grid-cols-[minmax(0,1fr)_24rem]', theater && 'pt-6 sm:px-6')}>
                 <div className="min-w-0 space-y-6">
                     {!theater && (
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, ease: EASE }}>
@@ -52,14 +52,18 @@ export function Watch({ series }: { series: Series }) {
                         </motion.div>
                     )}
 
-                    <WatchInfo series={series} episode={current} />
+                    <div className="space-y-6 px-4 sm:px-0">
+                        <WatchInfo series={series} episode={current} />
 
-                    <EpisodePanel series={series} episodes={episodes} current={current} onSelect={select} dark={false} />
+                        <EpisodePanel series={series} episodes={episodes} current={current} onSelect={select} dark={false} />
 
-                    <CommentsSection series={series} />
+                        <CommentsSection series={series} />
+                    </div>
                 </div>
 
-                <RelatedList series={series} />
+                <div className="px-4 sm:px-0">
+                    <RelatedList series={series} />
+                </div>
             </div>
         </div>
     )

@@ -39,10 +39,10 @@ export function HeroVisual() {
                 initial={{ opacity: 0, y: 80, rotateZ: -6 }}
                 animate={{ opacity: 1, y: 0, rotateZ: 0 }}
                 transition={{ duration: 1.2, ease: EASE }}
-                className="relative mx-auto w-[64%] max-w-[17.5rem]">
+                className="relative mx-auto w-[58%] max-w-[17.5rem] sm:w-[64%]">
                 <PhoneMockup series={MAIN} />
 
-                <Float delay={0.6} depth={60} className="top-[12%] -left-[45%]">
+                <Float delay={0.6} depth={60} className="top-[8%] -left-[38%] origin-left scale-[0.8] sm:-left-[45%] sm:scale-100">
                     <div className="flex items-center gap-2.5 rounded-full bg-butter py-2 pr-5 pl-2 text-sm font-medium whitespace-nowrap shadow-lg">
                         <span className="flex size-7 items-center justify-center rounded-full bg-primary text-on-primary">
                             <Check className="size-3.5" />
@@ -52,7 +52,7 @@ export function HeroVisual() {
                     </div>
                 </Float>
 
-                <Float delay={0.8} depth={90} className="top-[34%] -right-[40%] w-28 sm:w-32" slow>
+                <Float delay={0.8} depth={90} className="top-[34%] -right-[40%] hidden w-28 sm:block sm:w-32" slow>
                     <div className="overflow-hidden rounded-3xl border-4 border-surface bg-surface shadow-xl">
                         <div className="relative aspect-[3/4]">
                             <Image src={NEXT.poster} alt="" fill sizes="130px" className="object-cover" />
@@ -62,7 +62,7 @@ export function HeroVisual() {
                     </div>
                 </Float>
 
-                <Float delay={1} depth={70} className="bottom-[18%] -left-[55%]">
+                <Float delay={1} depth={70} className="bottom-[18%] -left-[55%] hidden sm:block">
                     <div className="flex w-60 items-center gap-3 rounded-2xl bg-surface p-2.5 shadow-xl">
                         <div className="relative h-14 w-11 shrink-0 overflow-hidden rounded-xl">
                             <Image src={THUMB.poster} alt="" fill sizes="44px" className="object-cover" />
@@ -82,7 +82,11 @@ export function HeroVisual() {
                     </div>
                 </Float>
 
-                <Float delay={1.2} depth={40} className="-right-[30%] bottom-[6%]" slow>
+                <Float
+                    delay={1.2}
+                    depth={40}
+                    className="-bottom-[4%] left-1/2 origin-bottom -translate-x-1/2 scale-[0.8] sm:-right-[30%] sm:bottom-[6%] sm:left-auto sm:translate-x-0 sm:scale-100"
+                    slow>
                     <div className="flex items-center gap-2 rounded-full bg-surface px-4 py-2 text-sm whitespace-nowrap shadow-lg">
                         <span className="relative flex size-2">
                             <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60" />

@@ -14,7 +14,7 @@ import { InstallSteps } from './InstallSteps'
 
 const DISMISS_KEY = 'feelreels.install-dismissed-at'
 const DISMISS_DAYS = 3
-const SHOW_AFTER_MS = 4000
+const SHOW_AFTER_MS = 20000
 const HIDDEN_ON = ['/login']
 
 const dismissedRecently = () => {

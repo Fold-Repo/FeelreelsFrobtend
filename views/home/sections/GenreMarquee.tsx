@@ -27,10 +27,10 @@ export function GenreMarquee() {
     const words = [...HOME.marquee, ...HOME.marquee]
 
     return (
-        <div aria-hidden className="overflow-hidden py-10 select-none">
+        <div aria-hidden className="overflow-hidden py-6 select-none sm:py-10">
             <motion.div style={{ x, skewX: skew }} className="flex w-max gap-10 whitespace-nowrap">
                 {[...words, ...words].map((word, index) => (
-                    <span key={index} className="flex items-center gap-10 text-[clamp(3rem,9vw,8rem)] leading-none font-semibold tracking-[-0.05em]">
+                    <span key={index} className="flex items-center gap-10 text-[clamp(2.25rem,9vw,8rem)] leading-none font-semibold tracking-[-0.05em]">
                         <span className={index % 2 ? 'text-transparent [-webkit-text-stroke:1.5px_var(--foreground)]' : ''}>{word}</span>
 
                         <span className="size-4 rounded-full bg-accent sm:size-6" />
