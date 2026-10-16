@@ -45,7 +45,7 @@ export function Trending() {
                         data-lenis-prevent={pinned ? undefined : true}
                         className={cn(
                             'flex gap-4 px-4 sm:gap-5 sm:px-6 lg:pr-0 lg:pl-[max(2rem,calc((100vw-80rem)/2+2rem))]',
-                            pinned ? 'will-change-transform' : 'no-scrollbar snap-x snap-mandatory overflow-x-auto py-2',
+                            pinned ? 'will-change-transform' : 'no-scrollbar touch-pan-x snap-x snap-mandatory overflow-x-auto overscroll-x-contain py-2 [-webkit-overflow-scrolling:touch]',
                         )}>
                         {ITEMS.map((series, index) => (
                             <div key={series.slug} className="w-40 shrink-0 snap-start sm:w-56 lg:w-64 [&_h3]:text-white [&_p]:text-white/55">
