@@ -48,7 +48,7 @@ export function CommentsSheet({ open, onClose, series, state }: CommentsSheetPro
                         dragConstraints={{ top: 0, bottom: 0 }}
                         dragElastic={{ top: 0, bottom: 0.6 }}
                         onDragEnd={(_, info) => info.offset.y > 120 && onClose()}
-                        className="fixed inset-x-0 bottom-0 z-[71] flex h-[78dvh] flex-col rounded-t-[1.75rem] bg-surface pb-[env(safe-area-inset-bottom)] md:hidden">
+                        className="fixed inset-x-0 bottom-0 z-[71] flex h-[78dvh] flex-col rounded-t-[1.75rem] bg-surface md:hidden">
                         <span className="mx-auto mt-2.5 h-1 w-10 shrink-0 rounded-full bg-line" />
 
                         <header className="flex shrink-0 items-center justify-between px-4 pt-3 pb-2">
