@@ -78,7 +78,7 @@ export function CommentsSheet({ open, onClose, series, state }: CommentsSheetPro
                             />
                         </div>
 
-                        <div className="shrink-0 border-t border-line px-4 py-3">
+                        <div className="shrink-0 border-t border-line px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
                             <CommentComposer
                                 variant="bar"
                                 compact
@@ -87,8 +87,6 @@ export function CommentsSheet({ open, onClose, series, state }: CommentsSheetPro
                                 submitLabel={copy.post}
                                 onSubmit={(text) => state.post(text)}
                             />
-
-                            <p className="mt-2 text-[0.7rem] text-muted">{copy.guestHint}</p>
                         </div>
                     </motion.section>
                 </>

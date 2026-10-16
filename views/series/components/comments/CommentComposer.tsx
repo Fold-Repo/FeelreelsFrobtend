@@ -94,10 +94,10 @@ export function CommentComposer({ author, placeholder, submitLabel, variant = 'b
 
     if (variant === 'bar') {
         return (
-            <form onSubmit={submit} className="flex items-end gap-2.5">
+            <form onSubmit={submit} className="flex items-center gap-2.5">
                 {avatar}
 
-                <div className="flex min-w-0 flex-1 items-end gap-2 rounded-3xl bg-background py-1.5 pr-1.5 pl-4 ring-1 ring-transparent transition-shadow focus-within:bg-surface focus-within:ring-line">
+                <div className="flex min-w-0 flex-1 items-center gap-2 rounded-3xl bg-background py-1.5 pr-1.5 pl-4 ring-1 ring-transparent transition-shadow focus-within:bg-surface focus-within:ring-line">
                     <div className="min-w-0 flex-1 py-1.5">{field}</div>
 
                     <button

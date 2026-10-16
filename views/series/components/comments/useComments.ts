@@ -7,7 +7,6 @@ import type { Series } from '@/types'
 import type { CommentData } from './types'
 
 export function useComments(series: Series) {
-    
     const { viewer, addComment } = useViewer()
     const [sort, setSort] = useState('top')
     const copy = WATCH.commentsPanel
