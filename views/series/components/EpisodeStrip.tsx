@@ -43,12 +43,11 @@ export function EpisodeStrip({ series, episodes, current, onSelect }: EpisodeStr
                             active ? 'ring-accent' : 'ring-transparent hover:ring-white/40',
                         )}>
                         <Image
-                            src={series.thumbnail}
+                            src={episode.thumbnail}
                             alt=""
                             fill
                             sizes="96px"
                             className={cn('object-cover transition-transform duration-500 group-hover:scale-110', locked && 'opacity-40 grayscale')}
-                            style={{ objectPosition: `${(episode.number * 17) % 100}% 50%` }}
                         />
 
                         <span className="absolute inset-x-1 bottom-1 flex items-center justify-between text-[0.65rem] font-semibold">

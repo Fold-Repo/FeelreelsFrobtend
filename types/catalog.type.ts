@@ -8,5 +8,6 @@ export type Episode = {
     number: number
     title: string
     src: string
+    thumbnail: string
     isFree: boolean
 }

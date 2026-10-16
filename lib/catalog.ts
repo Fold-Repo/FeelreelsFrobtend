@@ -35,17 +35,16 @@ export function getRelatedSeries(series: Series, limit = 6) {
 }
 
 export function getEpisodes(series: Series): Episode[] {
+    const start = Math.max(
+        0,
+        ALL_SERIES.findIndex((item) => item.slug === series.slug),
+    )
+
     return Array.from({ length: series.episodes }, (_, index) => ({
         number: index + 1,
         title: interpolate(WATCH.episode, { number: index + 1 }),
-        src: CLIPS[
-            (index +
-                Math.max(
-                    0,
-                    ALL_SERIES.findIndex((item) => item.slug === series.slug),
-                )) %
-                CLIPS.length
-        ],
+        src: CLIPS[(index + start) % CLIPS.length],
+        thumbnail: index === 0 ? series.thumbnail : ALL_SERIES[(start + index) % ALL_SERIES.length].thumbnail,
         isFree: index < series.freeEpisodes,
     }))
 }

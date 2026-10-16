@@ -47,7 +47,8 @@ export function PopupModal({
         <Modal state={state}>
             <Modal.Backdrop variant={backdrop} isDismissable={isDismissable}>
                 <Modal.Container placement={placement} size={size} scroll="inside">
-                    <Modal.Dialog className={cn('flex max-h-[90vh] flex-col overflow-hidden rounded-2xl bg-surface p-0 shadow-lg outline-none', className)}>
+                    <Modal.Dialog
+                        className={cn('flex max-h-[90vh] flex-col overflow-hidden rounded-2xl bg-surface p-0 text-ink shadow-lg outline-none', className)}>
                         {title && (
                             <Modal.Header className={cn('relative flex flex-row items-center gap-3 border-b border-line px-5 py-3', headerClassName)}>
                                 {icon && <span className="shrink-0">{icon}</span>}

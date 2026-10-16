@@ -469,12 +469,14 @@
         }
     ],
     "videos": [
-        "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
+        "https://archive.org/download/big-bunny-sample-video/SampleVideo.mp4",
         "https://download.blender.org/durian/trailer/sintel_trailer-720p.mp4",
         "https://archive.org/download/ElephantsDream/ed_1024_512kb.mp4",
         "https://media.w3.org/2010/05/bunny/trailer.mp4",
         "https://vjs.zencdn.net/v/oceans.mp4",
-        "https://media.w3.org/2010/05/video/movie_300.mp4",
-        "https://media.w3.org/2010/05/sintel/trailer.mp4"
+        "https://archive.org/download/Sintel/sintel-2048-stereo_512kb.mp4",
+        "https://media.w3.org/2010/05/sintel/trailer.mp4",
+        "https://test-videos.co.uk/vids/jellyfish/mp4/h264/720/Jellyfish_720_10s_5MB.mp4",
+        "https://media.w3.org/2010/05/video/movie_300.mp4"
     ]
 }
