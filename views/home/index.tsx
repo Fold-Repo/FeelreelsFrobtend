@@ -1,4 +1,4 @@
-import { GenreMarquee, Genres, Hero, Install, Trending } from './sections'
+import { GenreMarquee, Hero, Install, Shelves, Spotlight } from './sections'
 
 export default function HomeView() {
     return (
@@ -7,9 +7,9 @@ export default function HomeView() {
 
             <GenreMarquee />
 
-            <Genres />
+            <Spotlight />
 
-            <Trending />
+            <Shelves />
 
             <Install />
         </>

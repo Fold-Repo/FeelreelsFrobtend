@@ -13,6 +13,8 @@ import { type NextUp, NextUpCard } from './NextUpCard'
 import { ProtectedVideo } from './ProtectedVideo'
 import { TapLayer } from './TapLayer'
 
+export const VERTICAL_STAGE = 'h-[min(72dvh,40rem)] w-full sm:aspect-video sm:h-auto sm:rounded-3xl'
+
 export type VideoPlayerProps = {
     src: string
     poster: string
@@ -80,7 +82,7 @@ export function VideoPlayer({
             onMouseLeave={() => state.playing && actions.poke()}
             className={cn(
                 'relative isolate overflow-hidden bg-black text-white select-none',
-                state.fullscreen ? 'h-dvh w-screen' : theater ? 'h-[min(78vh,60rem)] w-full' : 'aspect-[4/3] w-full sm:aspect-video sm:rounded-3xl',
+                state.fullscreen ? 'h-dvh w-screen' : theater ? 'h-[min(86vh,60rem)] w-full' : VERTICAL_STAGE,
                 chromeHidden && 'cursor-none',
             )}>
             <ProtectedVideo
@@ -92,7 +94,7 @@ export function VideoPlayer({
                     setEndedFor(src)
                     onEnded?.()
                 }}
-                className="absolute inset-0 h-full w-full object-contain"
+                className={cn('absolute inset-0 h-full w-full', theater || state.fullscreen ? 'object-contain' : 'object-cover sm:object-contain')}
             />
 
             <TapLayer playing={state.playing} onToggle={actions.toggle} onSeekBy={actions.seekBy} onActivity={actions.poke} />
@@ -129,7 +131,7 @@ export function VideoPlayer({
             {side && (
                 <div
                     className={cn(
-                        'absolute top-1/2 right-5 z-30 hidden -translate-y-1/2 transition-all duration-500 md:block',
+                        'absolute right-3 bottom-28 z-30 transition-all duration-500 sm:top-1/2 sm:right-5 sm:bottom-auto sm:-translate-y-1/2',
                         chromeHidden && 'translate-x-4 opacity-0',
                     )}>
                     {side}

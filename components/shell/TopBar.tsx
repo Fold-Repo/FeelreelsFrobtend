@@ -14,7 +14,7 @@ export function TopBar({ onMenu }: { onMenu: () => void }) {
     const { show } = useAppDownload()
 
     return (
-        <header className="sticky top-0 z-40 flex h-16 items-center gap-2 border-b border-line bg-surface/85 px-3 backdrop-blur-xl sm:h-[4.5rem] sm:gap-3 sm:px-6">
+        <header className="sticky top-0 z-40 flex h-16 items-center gap-2 border-b border-line bg-surface px-3 sm:h-[4.5rem] sm:gap-3 sm:bg-surface/85 sm:px-6 sm:backdrop-blur-xl">
             <button
                 type="button"
                 onClick={onMenu}

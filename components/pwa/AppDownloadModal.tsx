@@ -34,7 +34,7 @@ export function AppDownloadModal() {
             </div>
 
             <div className="px-6 pb-6 text-center">
-                <LogoMark className="mx-auto -mt-6 size-12 rounded-2xl ring-4 ring-surface" />
+                <LogoMark className="relative z-10 mx-auto -mt-6 size-12 rounded-2xl ring-4 ring-surface" />
 
                 <h2 className="mt-4 text-2xl font-semibold tracking-[-0.03em]">{store.title}</h2>
 

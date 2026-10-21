@@ -10,9 +10,10 @@ type ScrollRowProps = {
     className?: string
     trackClassName?: string
     activeKey?: string
+    wheelScroll?: boolean
 }
 
-export function ScrollRow({ children, className, trackClassName, activeKey }: ScrollRowProps) {
+export function ScrollRow({ children, className, trackClassName, activeKey, wheelScroll = true }: ScrollRowProps) {
     const ref = useRef<HTMLDivElement>(null)
     const [edges, setEdges] = useState({ start: false, end: false })
 
@@ -36,7 +37,7 @@ export function ScrollRow({ children, className, trackClassName, activeKey }: Sc
         observer.observe(node)
 
         const onWheel = (event: WheelEvent) => {
-            if (Math.abs(event.deltaY) <= Math.abs(event.deltaX) || node.scrollWidth <= node.clientWidth) return
+            if (!wheelScroll || Math.abs(event.deltaY) <= Math.abs(event.deltaX) || node.scrollWidth <= node.clientWidth) return
 
             event.preventDefault()
             node.scrollLeft += event.deltaY
@@ -48,7 +49,7 @@ export function ScrollRow({ children, className, trackClassName, activeKey }: Sc
             observer.disconnect()
             node.removeEventListener('wheel', onWheel)
         }
-    }, [measure])
+    }, [measure, wheelScroll])
 
     useEffect(() => {
         const node = ref.current
@@ -64,7 +65,7 @@ export function ScrollRow({ children, className, trackClassName, activeKey }: Sc
             <div
                 ref={ref}
                 onScroll={measure}
-                data-lenis-prevent
+                data-lenis-prevent={wheelScroll || undefined}
                 className={cn(
                     'no-scrollbar flex gap-2 overflow-x-auto scroll-smooth',
                     edges.start && edges.end && '[mask-image:linear-gradient(90deg,transparent,black_48px,black_calc(100%-48px),transparent)]',

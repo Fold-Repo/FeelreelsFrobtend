@@ -1,5 +1,5 @@
 export { GenreMarquee } from './GenreMarquee'
-export { Genres } from './Genres'
 export { Hero } from './Hero'
 export { Install } from './Install'
-export { Trending } from './Trending'
+export { Shelves } from './Shelves'
+export { Spotlight } from './Spotlight'

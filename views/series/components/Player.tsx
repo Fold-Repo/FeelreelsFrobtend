@@ -1,8 +1,9 @@
 'use client'
 
 import { useMemo } from 'react'
-import { VideoPlayer } from '@/components'
+import { VERTICAL_STAGE, VideoPlayer } from '@/components'
 import { useViewer } from '@/hooks'
+import { cn } from '@/lib'
 import type { Episode, Series } from '@/types'
 import { EpisodeStrip } from './EpisodeStrip'
 import { LockedOverlay } from './LockedOverlay'
@@ -29,12 +30,7 @@ export function Player({ series, episodes, current, theater, onSelect, onToggleT
 
     if (!canWatch(series, episode.number)) {
         return (
-            <div
-                className={
-                    theater
-                        ? 'relative h-[min(78vh,60rem)] w-full overflow-hidden bg-black'
-                        : 'relative aspect-[4/3] w-full overflow-hidden bg-black sm:aspect-video sm:rounded-3xl'
-                }>
+            <div className={cn('relative overflow-hidden bg-black', theater ? 'h-[min(86vh,60rem)] w-full' : VERTICAL_STAGE)}>
                 <LockedOverlay series={series} episode={episode} />
             </div>
         )

@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Crown, Play } from 'lucide-react'
 import { LABELS } from '@/constants'
-import { cn, getCategoryLabel, interpolate } from '@/lib'
+import { cn, formatCount, getCategoryLabel, interpolate } from '@/lib'
 import type { Series } from '@/types'
 
 type SeriesCardProps = {
@@ -13,7 +13,7 @@ type SeriesCardProps = {
 }
 
 export function SeriesCard({ series, rank, priority, className }: SeriesCardProps) {
-    const { slug, title, poster, category, episodes, isNew, isVip } = series
+    const { slug, title, poster, category, episodes, views, isNew, isVip } = series
 
     return (
         <Link href={`/series/${slug}`} className={cn('group block', className)}>
@@ -45,7 +45,13 @@ export function SeriesCard({ series, rank, priority, className }: SeriesCardProp
                     <Play className="ml-0.5 size-4 fill-current" />
                 </span>
 
-                <p className="absolute bottom-3 left-3 text-xs font-medium text-white/85">{interpolate(LABELS.episodes, { count: episodes })}</p>
+                <p
+                    className={cn(
+                        'absolute text-xs font-medium text-white/85',
+                        rank ? 'top-3 right-3 rounded-full bg-black/45 px-2 py-0.5 backdrop-blur-sm' : 'bottom-3 left-3',
+                    )}>
+                    {interpolate(LABELS.episodes, { count: episodes })}
+                </p>
 
                 {rank && (
                     <span
@@ -59,7 +65,9 @@ export function SeriesCard({ series, rank, priority, className }: SeriesCardProp
             <div className="mt-3 px-1">
                 <h3 className="line-clamp-1 font-semibold tracking-[-0.01em]">{title}</h3>
 
-                <p className="mt-0.5 text-sm text-muted">{getCategoryLabel(category)}</p>
+                <p className="mt-0.5 truncate text-sm text-muted">
+                    {getCategoryLabel(category)} · {interpolate(LABELS.views, { count: formatCount(views) })}
+                </p>
             </div>
         </Link>
     )
