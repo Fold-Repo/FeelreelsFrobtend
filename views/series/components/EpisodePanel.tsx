@@ -1,14 +1,12 @@
 'use client'
 
-import { useState } from 'react'
 import { FilterTabs } from '@/components'
 import { WATCH } from '@/data'
 import { useViewer } from '@/hooks'
 import { cn, interpolate } from '@/lib'
 import type { Episode, Series } from '@/types'
 import { EpisodeTile } from './EpisodeTile'
-
-const RANGE = 30
+import { useEpisodeRanges } from './useEpisodeRanges'
 
 type EpisodePanelProps = {
     series: Series
@@ -16,23 +14,19 @@ type EpisodePanelProps = {
     current: number
     onSelect: (number: number) => void
     dark: boolean
+    className?: string
 }
 
-export function EpisodePanel({ series, episodes, current, onSelect, dark }: EpisodePanelProps) {
+export function EpisodePanel({ series, episodes, current, onSelect, dark, className }: EpisodePanelProps) {
     const { canWatch } = useViewer()
-    const ranges = Array.from({ length: Math.ceil(episodes.length / RANGE) }, (_, index) => {
-        const start = index * RANGE + 1
-
-        return { label: `${start}–${Math.min(start + RANGE - 1, episodes.length)}`, value: String(index) }
-    })
-    const [range, setRange] = useState(String(Math.floor((current - 1) / RANGE)))
-    const visible = episodes.slice(Number(range) * RANGE, Number(range) * RANGE + RANGE)
+    const { ranges, range, setRange, visible } = useEpisodeRanges(episodes, current)
 
     return (
         <div
             className={cn(
                 'flex flex-col rounded-[1.75rem] p-5 transition-colors duration-700',
                 dark ? 'bg-night-soft text-white' : 'border border-line bg-surface',
+                className,
             )}>
             <div className="flex items-baseline justify-between gap-4">
                 <h2 className="text-lg font-semibold tracking-[-0.02em]">{WATCH.episodes}</h2>

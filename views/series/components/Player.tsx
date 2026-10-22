@@ -8,6 +8,7 @@ import type { Episode, Series } from '@/types'
 import { EpisodeStrip } from './EpisodeStrip'
 import { LockedOverlay } from './LockedOverlay'
 import { PlayerRail } from './PlayerRail'
+import { ReelOverlay } from './ReelOverlay'
 
 type PlayerProps = {
     series: Series
@@ -48,6 +49,9 @@ export function Player({ series, episodes, current, theater, onSelect, onToggleT
             next={next}
             onTheater={onToggleTheater}
             side={<PlayerRail series={series} episode={current} />}
+            mobileOverlay={(progress) => (
+                <ReelOverlay series={series} episodes={episodes} current={current} progress={progress} onSelect={onSelect} onNext={next?.onPlay} />
+            )}
             drawer={<EpisodeStrip series={series} episodes={episodes} current={current} onSelect={onSelect} />}
         />
     )

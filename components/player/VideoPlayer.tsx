@@ -13,7 +13,7 @@ import { type NextUp, NextUpCard } from './NextUpCard'
 import { ProtectedVideo } from './ProtectedVideo'
 import { TapLayer } from './TapLayer'
 
-export const VERTICAL_STAGE = 'h-[min(72dvh,40rem)] w-full sm:aspect-video sm:h-auto sm:rounded-3xl'
+export const VERTICAL_STAGE = 'h-[calc(100dvh-4rem)] w-full sm:aspect-video sm:h-auto sm:rounded-3xl'
 
 export type VideoPlayerProps = {
     src: string
@@ -26,6 +26,7 @@ export type VideoPlayerProps = {
     autoNext?: boolean
     side?: ReactNode
     drawer?: ReactNode
+    mobileOverlay?: (progress: number) => ReactNode
     onTheater?: () => void
     onEnded?: () => void
 }
@@ -41,6 +42,7 @@ export function VideoPlayer({
     autoNext = true,
     side,
     drawer,
+    mobileOverlay,
     onTheater,
     onEnded,
 }: VideoPlayerProps) {
@@ -51,6 +53,7 @@ export function VideoPlayer({
     const [drawerOpen, setDrawerOpen] = useState(false)
     const ended = endedFor === src
     const chromeHidden = state.idle && state.playing && !drawerOpen
+    const reel = Boolean(mobileOverlay)
 
     const shortcuts = useMemo(
         () => ({
@@ -122,6 +125,7 @@ export function VideoPlayer({
                 className={cn(
                     'pointer-events-none absolute inset-x-0 top-0 z-30 bg-linear-to-b from-black/70 to-transparent px-4 pt-3 pb-10 transition-opacity duration-500 sm:px-5 sm:pt-4 sm:pb-14',
                     chromeHidden && 'opacity-0',
+                    reel && 'max-sm:hidden',
                 )}>
                 {eyebrow && <p className="text-[0.7rem] text-white/70 sm:text-xs">{eyebrow}</p>}
 
@@ -131,7 +135,7 @@ export function VideoPlayer({
             {side && (
                 <div
                     className={cn(
-                        'absolute right-3 bottom-28 z-30 transition-all duration-500 sm:top-1/2 sm:right-5 sm:bottom-auto sm:-translate-y-1/2',
+                        'absolute top-1/2 right-5 z-30 hidden -translate-y-1/2 transition-all duration-500 sm:block',
                         chromeHidden && 'translate-x-4 opacity-0',
                     )}>
                     {side}
@@ -150,7 +154,12 @@ export function VideoPlayer({
                 )}
             </AnimatePresence>
 
+            {mobileOverlay && (
+                <div className="pointer-events-none absolute inset-0 z-30 sm:hidden">{mobileOverlay(state.duration ? state.current / state.duration : 0)}</div>
+            )}
+
             <ControlBar
+                className={cn(reel && 'max-sm:hidden')}
                 state={state}
                 actions={actions}
                 hidden={chromeHidden}

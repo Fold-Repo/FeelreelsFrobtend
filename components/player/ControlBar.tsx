@@ -10,6 +10,7 @@ import { SettingsMenu } from './SettingsMenu'
 import { VolumeControl } from './VolumeControl'
 
 export type ControlBarProps = {
+    className?: string
     state: PlayerState
     actions: PlayerActions
     hidden: boolean
@@ -25,6 +26,7 @@ export type ControlBarProps = {
 }
 
 export function ControlBar({
+    className,
     state,
     actions,
     hidden,
@@ -43,6 +45,7 @@ export function ControlBar({
             className={cn(
                 'absolute inset-x-0 bottom-0 z-30 bg-linear-to-t from-black/85 via-black/40 to-transparent px-2 pt-12 pb-1 text-white transition-all duration-500 sm:px-5 sm:pt-16 sm:pb-3',
                 hidden && 'pointer-events-none translate-y-3 opacity-0',
+                className,
             )}>
             <Scrubber current={state.current} duration={state.duration} buffered={state.buffered} onSeek={actions.seekTo} />
 

@@ -190,5 +190,12 @@
                 ]
             }
         ]
+    },
+    "reel": {
+        "episodes": "Episodes 1–{total}",
+        "current": "Ep {number}",
+        "next": "Next",
+        "save": "Save",
+        "close": "Close episodes"
     }
 }

@@ -55,7 +55,7 @@ export function Watch({ series }: { series: Series }) {
                     <div className="space-y-6 px-4 sm:px-0">
                         <WatchInfo series={series} episode={current} />
 
-                        <EpisodePanel series={series} episodes={episodes} current={current} onSelect={select} dark={false} />
+                        <EpisodePanel series={series} episodes={episodes} current={current} onSelect={select} dark={false} className="max-sm:hidden" />
 
                         <CommentsSection series={series} />
                     </div>

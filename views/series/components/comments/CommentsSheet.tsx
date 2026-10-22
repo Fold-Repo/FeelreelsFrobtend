@@ -1,9 +1,10 @@
 'use client'
 
 import { createPortal } from 'react-dom'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion, useDragControls } from 'framer-motion'
 import { X } from 'lucide-react'
 import { WATCH } from '@/data'
+import { useScrollLock } from '@/hooks'
 import { EASE, formatCount } from '@/lib'
 import type { Series } from '@/types'
 import { CommentComposer } from './CommentComposer'
@@ -20,6 +21,9 @@ type CommentsSheetProps = {
 
 export function CommentsSheet({ open, onClose, series, state }: CommentsSheetProps) {
     const copy = WATCH.commentsPanel
+    const controls = useDragControls()
+
+    useScrollLock(open)
 
     if (typeof document === 'undefined') return null
 
@@ -45,11 +49,15 @@ export function CommentsSheet({ open, onClose, series, state }: CommentsSheetPro
                         exit={{ y: '100%' }}
                         transition={{ duration: 0.45, ease: EASE }}
                         drag="y"
+                        dragListener={false}
+                        dragControls={controls}
                         dragConstraints={{ top: 0, bottom: 0 }}
                         dragElastic={{ top: 0, bottom: 0.6 }}
                         onDragEnd={(_, info) => info.offset.y > 120 && onClose()}
                         className="fixed inset-x-0 bottom-0 z-[71] flex h-[78dvh] flex-col rounded-t-[1.75rem] bg-surface md:hidden">
-                        <span className="mx-auto mt-2.5 h-1 w-10 shrink-0 rounded-full bg-line" />
+                        <div onPointerDown={(event) => controls.start(event)} className="shrink-0 cursor-grab touch-none py-2.5">
+                            <span className="mx-auto block h-1 w-10 rounded-full bg-line" />
+                        </div>
 
                         <header className="flex shrink-0 items-center justify-between px-4 pt-3 pb-2">
                             <h2 className="text-lg font-semibold tracking-[-0.02em]">
