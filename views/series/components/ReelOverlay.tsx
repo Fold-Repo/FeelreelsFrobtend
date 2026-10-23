@@ -1,13 +1,11 @@
 'use client'
 
-import { useState } from 'react'
 import { Bookmark, Heart, Layers, MessageCircle, Play, Send } from 'lucide-react'
 import { WATCH } from '@/data'
 import { useEngagement, useShareSeries } from '@/hooks'
 import { cn, formatCount, interpolate } from '@/lib'
 import type { Episode, Series } from '@/types'
 import { OPEN_COMMENTS_EVENT } from './comments/CommentsSection'
-import { EpisodeSheet } from './EpisodeSheet'
 import { ReelAction } from './ReelAction'
 
 type ReelOverlayProps = {
@@ -17,11 +15,11 @@ type ReelOverlayProps = {
     progress: number
     onSelect: (number: number) => void
     onNext?: () => void
+    onOpenEpisodes: () => void
 }
 
-export function ReelOverlay({ series, episodes, current, progress, onSelect, onNext }: ReelOverlayProps) {
+export function ReelOverlay({ series, episodes, current, progress, onSelect, onNext, onOpenEpisodes }: ReelOverlayProps) {
     const { liked, saved, likeCount, toggleLike, toggleSave } = useEngagement(series.slug)
-    const [sheetOpen, setSheetOpen] = useState(false)
     const share = useShareSeries(series, current)
     const { title, synopsis, tags, comments } = series
     const copy = WATCH.reel
@@ -79,7 +77,7 @@ export function ReelOverlay({ series, episodes, current, progress, onSelect, onN
                 <div className="pointer-events-auto mt-3 flex items-center gap-2">
                     <button
                         type="button"
-                        onClick={() => setSheetOpen(true)}
+                        onClick={onOpenEpisodes}
                         className="flex h-11 min-w-0 flex-1 items-center gap-2 rounded-2xl bg-white/15 px-3 text-sm">
                         <Layers className="size-4 shrink-0" />
 
@@ -101,7 +99,6 @@ export function ReelOverlay({ series, episodes, current, progress, onSelect, onN
                 </div>
             </div>
 
-            <EpisodeSheet open={sheetOpen} onClose={() => setSheetOpen(false)} series={series} episodes={episodes} current={current} onSelect={onSelect} />
         </>
     )
 }

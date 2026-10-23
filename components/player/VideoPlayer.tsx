@@ -30,6 +30,8 @@ export type VideoPlayerProps = {
     onTheater?: () => void
     onEnded?: () => void
     onProgress?: (current: number, duration: number) => void
+    onEpisodes?: () => void
+    episodesOpen?: boolean
 }
 
 export function VideoPlayer({
@@ -47,6 +49,8 @@ export function VideoPlayer({
     onTheater,
     onEnded,
     onProgress,
+    onEpisodes,
+    episodesOpen: episodesOpenProp,
 }: VideoPlayerProps) {
     const { stageRef, videoProps, state, actions } = useVideoPlayer(src)
     const [captions, setCaptions] = useState(defaultCaptions)
@@ -173,12 +177,12 @@ export function VideoPlayer({
                 theater={theater}
                 captions={captions}
                 quality={quality}
-                episodesOpen={drawerOpen}
+                episodesOpen={episodesOpenProp ?? drawerOpen}
                 onCaptions={() => setCaptions((value) => !value)}
                 onQuality={setQuality}
                 onTheater={onTheater}
                 onNext={next?.onPlay}
-                onEpisodes={drawer ? () => setDrawerOpen((value) => !value) : undefined}
+                onEpisodes={onEpisodes ?? (drawer ? () => setDrawerOpen((value) => !value) : undefined)}
             />
 
             <AnimatePresence>{ended && autoNext && next && <NextUpCard key={src} next={next} onCancel={() => setEndedFor(null)} />}</AnimatePresence>

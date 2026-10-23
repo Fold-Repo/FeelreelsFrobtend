@@ -1,7 +1,9 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { AnimatePresence, motion, useDragControls } from 'framer-motion'
+import { X } from 'lucide-react'
 import { FilterTabs } from '@/components'
 import { WATCH } from '@/data'
 import { useScrollLock, useViewer } from '@/hooks'
@@ -23,8 +25,19 @@ export function EpisodeSheet({ open, onClose, series, episodes, current, onSelec
     const { viewer } = useViewer()
     const controls = useDragControls()
     const { ranges, range, setRange, visible } = useEpisodeRanges(episodes, current)
+    const [compact, setCompact] = useState(false)
 
-    useScrollLock(open)
+    useEffect(() => {
+        const query = window.matchMedia('(max-width: 639px)')
+        const update = () => setCompact(query.matches)
+
+        update()
+        query.addEventListener('change', update)
+
+        return () => query.removeEventListener('change', update)
+    }, [])
+
+    useScrollLock(open && compact)
 
     if (typeof document === 'undefined') return null
 
@@ -82,6 +95,65 @@ export function EpisodeSheet({ open, onClose, series, episodes, current, onSelec
                         <div
                             data-lenis-prevent
                             className="grid min-h-0 flex-1 auto-rows-[3rem] grid-cols-6 gap-2 overflow-y-auto overscroll-contain px-4 pt-3 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
+                            {visible.map((episode) => (
+                                <EpisodeTile
+                                    key={episode.number}
+                                    episode={episode}
+                                    active={episode.number === current}
+                                    locked={!isPlayable(viewer, series.slug, episode)}
+                                    dark={false}
+                                    onSelect={() => onSelect(episode.number)}
+                                />
+                            ))}
+                        </div>
+                    </motion.section>
+
+                    <motion.button
+                        type="button"
+                        aria-label={WATCH.reel.close}
+                        onClick={onClose}
+                        className="fixed inset-0 z-[70] hidden sm:block"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                    />
+
+                    <motion.section
+                        role="dialog"
+                        aria-label={WATCH.episodes}
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 16 }}
+                        transition={{ duration: 0.25, ease: EASE }}
+                        className="fixed right-6 bottom-6 z-[71] hidden max-h-[min(32rem,calc(100dvh-7rem))] w-[22rem] flex-col overflow-hidden rounded-3xl border border-line bg-surface shadow-2xl sm:flex">
+                        <header className="shrink-0 border-b border-line px-4 py-3">
+                            <div className="flex items-center justify-between gap-3">
+                                <h2 className="text-lg font-semibold tracking-[-0.02em]">{WATCH.episodes}</h2>
+
+                                <button
+                                    type="button"
+                                    onClick={onClose}
+                                    aria-label={WATCH.reel.close}
+                                    className="flex size-8 items-center justify-center rounded-full text-muted hover:bg-background">
+                                    <X className="size-4" />
+                                </button>
+                            </div>
+
+                            <p className="mt-1 text-xs text-muted">{interpolate(WATCH.freeNote, { count: series.freeEpisodes })}</p>
+
+                            {ranges.length > 1 && (
+                                <FilterTabs
+                                    id="sheet-ranges-desktop"
+                                    label={WATCH.episodes}
+                                    options={ranges}
+                                    value={range}
+                                    onChange={setRange}
+                                    className="mt-3 [&_button]:h-8 [&_button]:text-xs"
+                                />
+                            )}
+                        </header>
+
+                        <div data-lenis-prevent className="grid min-h-0 flex-1 auto-rows-[3rem] grid-cols-5 gap-2 overflow-y-auto overscroll-contain p-4">
                             {visible.map((episode) => (
                                 <EpisodeTile
                                     key={episode.number}

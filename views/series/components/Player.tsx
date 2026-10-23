@@ -8,7 +8,6 @@ import { cn, isPlayable } from '@/lib'
 import { ApiError, savePlaybackProgress } from '@/lib/api'
 import { playbackSrc } from '@/lib/media-src'
 import type { Episode, Series } from '@/types'
-import { EpisodeStrip } from './EpisodeStrip'
 import { LockedOverlay } from './LockedOverlay'
 import { PlayerRail } from './PlayerRail'
 import { ReelOverlay } from './ReelOverlay'
@@ -20,9 +19,11 @@ type PlayerProps = {
     theater: boolean
     onSelect: (number: number) => void
     onToggleTheater: () => void
+    onOpenEpisodes: () => void
+    episodesOpen: boolean
 }
 
-export function Player({ series, episodes, current, theater, onSelect, onToggleTheater }: PlayerProps) {
+export function Player({ series, episodes, current, theater, onSelect, onToggleTheater, onOpenEpisodes, episodesOpen }: PlayerProps) {
     const { viewer } = useViewer()
     const episode = episodes[current - 1]
     const following = episodes[current]
@@ -94,11 +95,20 @@ export function Player({ series, episodes, current, theater, onSelect, onToggleT
             next={next}
             onTheater={onToggleTheater}
             onProgress={report}
+            onEpisodes={onOpenEpisodes}
+            episodesOpen={episodesOpen}
             side={<PlayerRail series={series} episode={current} />}
             mobileOverlay={(progress) => (
-                <ReelOverlay series={series} episodes={episodes} current={current} progress={progress} onSelect={onSelect} onNext={next?.onPlay} />
+                <ReelOverlay
+                    series={series}
+                    episodes={episodes}
+                    current={current}
+                    progress={progress}
+                    onSelect={onSelect}
+                    onNext={next?.onPlay}
+                    onOpenEpisodes={onOpenEpisodes}
+                />
             )}
-            drawer={<EpisodeStrip series={series} episodes={episodes} current={current} onSelect={onSelect} />}
         />
     )
 }
