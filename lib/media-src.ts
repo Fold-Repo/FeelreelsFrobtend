@@ -6,7 +6,20 @@ export function isHlsUrl(src: string) {
 export function playbackSrc(src: string) {
     if (!src || !isHlsUrl(src)) return src
 
-    return `/api/media?url=${encodeURIComponent(src)}`
+    return mediaProxyPath(src)
+}
+
+export function mediaProxyPath(url: string) {
+    return `/api/media/u/${encodeMediaToken(url)}`
+}
+
+function encodeMediaToken(url: string) {
+    const bytes = new TextEncoder().encode(url)
+    let binary = ''
+
+    for (const byte of bytes) binary += String.fromCharCode(byte)
+
+    return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/g, '')
 }
 
 export function isPlaylistSrc(src: string) {

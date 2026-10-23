@@ -3,13 +3,13 @@ import type { Episode, Series } from '@/types'
 import { ApiError, apiRequest, catalogFlags } from './client'
 import type { MovieDetail, MoviePage, MovieSummary } from './types'
 
-export async function fetchAllMovies() {
+export async function fetchAllMovies(options?: { revalidate?: number }) {
     const items: MovieSummary[] = []
     let page = 0
     let hasMore = true
 
     while (hasMore && page < 40) {
-        const result = await apiRequest<MoviePage>(`/catalog/movies${catalogFlags({ page, limit: 50 })}`)
+        const result = await apiRequest<MoviePage>(`/catalog/movies${catalogFlags({ page, limit: 50 })}`, options)
 
         items.push(...result.items)
         hasMore = result.hasMore

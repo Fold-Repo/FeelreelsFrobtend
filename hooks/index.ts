@@ -1,5 +1,6 @@
 export { useEngagement, useWallet } from './useAccount'
 export { useAppDownload } from './useAppDownload'
+export { CatalogSeedProvider } from './CatalogSeed'
 export { useCatalog, useMovie } from './useCatalog'
 export { useEpisodeStream } from './usePlayback'
 export { useClickOutside } from './useClickOutside'

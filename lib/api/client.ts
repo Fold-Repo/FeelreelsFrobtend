@@ -44,6 +44,7 @@ type RequestOptions = {
     method?: string
     body?: unknown
     device?: boolean
+    revalidate?: number
 }
 
 export async function apiRequest<T>(path: string, options: RequestOptions = {}): Promise<T> {
@@ -56,7 +57,7 @@ export async function apiRequest<T>(path: string, options: RequestOptions = {}):
         method: options.method ?? 'GET',
         headers,
         body: options.body !== undefined ? JSON.stringify(options.body) : undefined,
-        cache: 'no-store',
+        ...(options.revalidate === undefined ? { cache: 'no-store' as const } : { next: { revalidate: options.revalidate } }),
     })
 
     if (response.status === 204) return undefined as T

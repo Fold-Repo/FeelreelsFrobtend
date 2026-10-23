@@ -13,7 +13,7 @@ type ShelfProps = {
 
 export function Shelf({ title, href, items, ranked }: ShelfProps) {
     return (
-        <div className="[contain-intrinsic-size:auto_24rem] [content-visibility:auto]">
+        <div>
             <div className="mb-5 flex items-end justify-between gap-4">
                 <h2 className="text-2xl font-semibold tracking-[-0.03em] sm:text-3xl">{title}</h2>
 
