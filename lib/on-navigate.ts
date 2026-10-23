@@ -11,7 +11,11 @@ function ensurePatched() {
 
     const { pushState, replaceState } = history
 
-    const notify = () => listeners.forEach((listener) => listener())
+    const notify = () => {
+        queueMicrotask(() => {
+            listeners.forEach((listener) => listener())
+        })
+    }
 
     history.pushState = function (...args) {
         pushState.apply(this, args)
