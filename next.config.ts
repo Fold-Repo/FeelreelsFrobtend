@@ -2,10 +2,10 @@ import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
     images: {
-        // Catalog covers are served by the local API (localhost:3005). The optimizer
-        // otherwise rejects that host because it resolves to a private IP.
+        // Local covers resolve to a private IP. Production covers come from halloreels.com.
         dangerouslyAllowLocalIP: true,
         remotePatterns: [
+            { protocol: 'https', hostname: 'halloreels.com', pathname: '/**' },
             { protocol: 'http', hostname: 'localhost', pathname: '/**' },
             { protocol: 'http', hostname: '127.0.0.1', pathname: '/**' },
             { protocol: 'https', hostname: 'video.dfoldlab.co.uk', pathname: '/**' },

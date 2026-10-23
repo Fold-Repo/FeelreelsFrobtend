@@ -11,7 +11,7 @@ export class ApiError extends Error {
 }
 
 export function apiBase() {
-    const raw = process.env.NEXT_PUBLIC_API_BASE_URL?.trim() || 'http://localhost:3005/api'
+    const raw = process.env.NEXT_PUBLIC_API_BASE_URL?.trim() || 'https://halloreels.com/api'
 
     return raw.replace(/\/+$/, '')
 }
