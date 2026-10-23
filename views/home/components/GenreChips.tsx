@@ -1,15 +1,23 @@
+'use client'
+
 import Link from 'next/link'
 import { ScrollRow } from '@/components'
 import { HOME } from '@/data'
-import { CATEGORIES } from '@/lib'
+import { useCatalog } from '@/hooks'
+import { categoriesFrom } from '@/lib'
 
 export function GenreChips() {
+    const { data: series = [] } = useCatalog()
+    const categories = categoriesFrom(series)
+
+    if (!categories.length) return null
+
     return (
         <div>
             <h2 className="mb-4 text-2xl font-semibold tracking-[-0.03em] sm:text-3xl">{HOME.shelves.genres}</h2>
 
             <ScrollRow wheelScroll={false} trackClassName="-mx-4 px-4 sm:mx-0 sm:px-0">
-                {CATEGORIES.map((category) => (
+                {categories.map((category) => (
                     <Link
                         key={category.slug}
                         href={`/browse?category=${category.slug}`}

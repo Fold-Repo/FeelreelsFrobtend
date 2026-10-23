@@ -1,10 +1,14 @@
+'use client'
+
 import Image from 'next/image'
 import { Container, FadeUp, LogoMark, StoreBadge } from '@/components'
 import { HOME, INSTALL } from '@/data'
-import { ALL_SERIES } from '@/lib'
+import { useCatalog } from '@/hooks'
 import { NotificationCard } from '../components/NotificationCard'
 
 export function Install() {
+    const { data: series = [] } = useCatalog()
+    const posters = series.slice(0, 8)
     const { title, accent, text } = HOME.install
 
     return (
@@ -42,9 +46,9 @@ export function Install() {
                             </div>
 
                             <div className="grid grid-cols-4 gap-2 p-3">
-                                {ALL_SERIES.slice(10, 18).map((series) => (
-                                    <div key={series.slug} className="relative aspect-[2/3] overflow-hidden rounded-xl">
-                                        <Image src={series.poster} alt="" fill sizes="120px" className="object-cover" />
+                                {posters.map((item) => (
+                                    <div key={item.slug} className="relative aspect-[2/3] overflow-hidden rounded-xl">
+                                        <Image src={item.poster} alt="" fill sizes="120px" className="object-cover" />
                                     </div>
                                 ))}
                             </div>

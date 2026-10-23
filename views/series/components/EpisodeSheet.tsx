@@ -5,7 +5,7 @@ import { AnimatePresence, motion, useDragControls } from 'framer-motion'
 import { FilterTabs } from '@/components'
 import { WATCH } from '@/data'
 import { useScrollLock, useViewer } from '@/hooks'
-import { EASE, interpolate } from '@/lib'
+import { EASE, interpolate, isPlayable } from '@/lib'
 import type { Episode, Series } from '@/types'
 import { EpisodeTile } from './EpisodeTile'
 import { useEpisodeRanges } from './useEpisodeRanges'
@@ -20,7 +20,7 @@ type EpisodeSheetProps = {
 }
 
 export function EpisodeSheet({ open, onClose, series, episodes, current, onSelect }: EpisodeSheetProps) {
-    const { canWatch } = useViewer()
+    const { viewer } = useViewer()
     const controls = useDragControls()
     const { ranges, range, setRange, visible } = useEpisodeRanges(episodes, current)
 
@@ -87,7 +87,7 @@ export function EpisodeSheet({ open, onClose, series, episodes, current, onSelec
                                     key={episode.number}
                                     episode={episode}
                                     active={episode.number === current}
-                                    locked={!canWatch(series, episode.number)}
+                                    locked={!isPlayable(viewer, series.slug, episode)}
                                     dark={false}
                                     onSelect={() => onSelect(episode.number)}
                                 />

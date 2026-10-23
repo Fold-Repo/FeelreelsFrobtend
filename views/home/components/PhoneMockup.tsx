@@ -4,11 +4,11 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Bookmark, ChevronLeft, Heart, Layers, MessageCircle, Play, Send } from 'lucide-react'
 import { ProtectedVideo } from '@/components'
-import { CATALOG, HOME } from '@/data'
+import { HOME } from '@/data'
 import type { Series } from '@/types'
 import { PhoneAction } from './PhoneAction'
 
-export function PhoneMockup({ series }: { series: Series }) {
+export function PhoneMockup({ series, previewSrc }: { series: Series; previewSrc?: string }) {
     const phone = HOME.hero.phone
 
     return (
@@ -17,8 +17,8 @@ export function PhoneMockup({ series }: { series: Series }) {
 
             <span className="absolute top-24 -right-[3px] h-16 w-[3px] rounded-r bg-night-soft" />
 
-            <div className="relative aspect-[9/19] overflow-hidden rounded-[1.6rem] bg-black sm:rounded-[2.4rem]">
-                <ProtectedVideo src={CATALOG.videos[4]} poster={series.poster} autoPlay muted loop className="absolute inset-0 h-full w-full object-cover" />
+            <div className="relative isolate aspect-[9/19] overflow-hidden rounded-[1.6rem] bg-black [transform:translateZ(0)] [clip-path:inset(0_round_1.6rem)] sm:rounded-[2.4rem] sm:[clip-path:inset(0_round_2.4rem)]">
+                {previewSrc && <ProtectedVideo src={previewSrc} poster={series.poster} autoPlay muted loop className="absolute inset-0 h-full w-full object-cover" />}
 
                 <Image src={series.poster} alt="" fill priority sizes="300px" className="-z-10 object-cover" />
 

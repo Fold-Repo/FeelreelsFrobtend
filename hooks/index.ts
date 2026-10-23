@@ -1,4 +1,7 @@
+export { useEngagement, useWallet } from './useAccount'
 export { useAppDownload } from './useAppDownload'
+export { useCatalog, useMovie } from './useCatalog'
+export { useEpisodeStream } from './usePlayback'
 export { useClickOutside } from './useClickOutside'
 export { useDebounce } from './useDebounce'
 export { useInfiniteScroll } from './useInfiniteScroll'

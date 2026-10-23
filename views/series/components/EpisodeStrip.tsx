@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useEffect, useRef } from 'react'
 import { Lock } from 'lucide-react'
 import { useViewer } from '@/hooks'
-import { cn } from '@/lib'
+import { cn, isPlayable } from '@/lib'
 import type { Episode, Series } from '@/types'
 
 type EpisodeStripProps = {
@@ -15,7 +15,7 @@ type EpisodeStripProps = {
 }
 
 export function EpisodeStrip({ series, episodes, current, onSelect }: EpisodeStripProps) {
-    const { canWatch } = useViewer()
+    const { viewer } = useViewer()
     const trackRef = useRef<HTMLDivElement>(null)
     const activeRef = useRef<HTMLButtonElement>(null)
 
@@ -30,7 +30,7 @@ export function EpisodeStrip({ series, episodes, current, onSelect }: EpisodeStr
         <div ref={trackRef} data-lenis-prevent className="relative no-scrollbar flex gap-1.5 overflow-x-auto rounded-2xl bg-black/60 p-1.5 backdrop-blur-xl">
             {episodes.map((episode) => {
                 const active = episode.number === current
-                const locked = !canWatch(series, episode.number)
+                const locked = !isPlayable(viewer, series.slug, episode)
 
                 return (
                     <button

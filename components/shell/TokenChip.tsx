@@ -3,13 +3,13 @@
 import Link from 'next/link'
 import { Crown, Plus } from 'lucide-react'
 import { NAV_ACTIONS } from '@/constants'
-import { useViewer } from '@/hooks'
+import { useWallet } from '@/hooks'
 import { cn } from '@/lib'
 
 export function TokenChip({ className }: { className?: string }) {
-    const { viewer } = useViewer()
+    const { data } = useWallet()
 
-    if (viewer.vip) {
+    if (data?.vipActive) {
         return (
             <Link href="/settings" className={cn('flex h-10 items-center gap-2 rounded-full bg-night pr-4 pl-1.5 text-sm font-semibold text-white', className)}>
                 <span className="flex size-7 items-center justify-center rounded-full bg-gold text-ink">
@@ -30,7 +30,7 @@ export function TokenChip({ className }: { className?: string }) {
                 ¢
             </span>
 
-            <span className="font-semibold tabular-nums">{viewer.tokens}</span>
+            <span className="font-semibold tabular-nums">{data?.coinBalance ?? 0}</span>
 
             <span className="hidden size-7 items-center justify-center rounded-full bg-background transition-colors group-hover:bg-primary group-hover:text-on-primary sm:flex">
                 <Plus className="size-3.5" />

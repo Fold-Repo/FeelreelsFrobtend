@@ -1,12 +1,13 @@
 import type { MetadataRoute } from 'next'
-import { ALL_SERIES } from '@/lib'
+import { fetchAllMovies } from '@/lib/api'
 import { getOrigin } from '@/lib/seo'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const origin = await getOrigin()
+    const series = await fetchAllMovies().catch(() => [])
 
     return [
         { url: origin, changeFrequency: 'daily', priority: 1 },
-        ...ALL_SERIES.map((series) => ({ url: `${origin}/series/${series.slug}`, changeFrequency: 'weekly' as const, priority: 0.8 })),
+        ...series.map((item) => ({ url: `${origin}/series/${item.slug}`, changeFrequency: 'weekly' as const, priority: 0.8 })),
     ]
 }

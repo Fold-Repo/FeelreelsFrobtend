@@ -1,11 +1,9 @@
 'use client'
 
-import { usePathname } from 'next/navigation'
 import { useEffect } from 'react'
+import { onNavigate } from '@/lib/on-navigate'
 
 export function ServiceWorker() {
-    const pathname = usePathname()
-
     useEffect(() => {
         if (!('serviceWorker' in navigator)) return
 
@@ -16,19 +14,30 @@ export function ServiceWorker() {
         }
 
         navigator.serviceWorker.register('/sw.js').catch(() => undefined)
+
+        let timer = 0
+
+        const save = () => {
+            window.clearTimeout(timer)
+
+            if (!navigator.onLine) return
+
+            timer = window.setTimeout(() => {
+                const url = window.location.pathname + window.location.search
+
+                void navigator.serviceWorker.ready.then((registration) => registration.active?.postMessage({ type: 'save-page', url }))
+            }, 1500)
+        }
+
+        save()
+
+        const stop = onNavigate(save)
+
+        return () => {
+            window.clearTimeout(timer)
+            stop()
+        }
     }, [])
-
-    useEffect(() => {
-        if (process.env.NODE_ENV !== 'production' || !('serviceWorker' in navigator) || !navigator.onLine) return
-
-        const id = window.setTimeout(() => {
-            void navigator.serviceWorker.ready.then((registration) =>
-                registration.active?.postMessage({ type: 'save-page', url: window.location.pathname + window.location.search }),
-            )
-        }, 1500)
-
-        return () => window.clearTimeout(id)
-    }, [pathname])
 
     return null
 }

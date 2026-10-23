@@ -3,20 +3,19 @@
 import Image from 'next/image'
 import { useState } from 'react'
 import { Bookmark, BookmarkCheck, Eye, MessageCircle, Share2, Star, ThumbsUp } from 'lucide-react'
-import { Button } from '@/components'
+import { Button, TimeAgo } from '@/components'
 import { LABELS } from '@/constants'
 import { WATCH } from '@/data'
-import { useShareSeries, useViewer } from '@/hooks'
-import { CATALOG_UPDATED_AT, cn, formatCount, getCategoryLabel, interpolate, timeAgo } from '@/lib'
+import { useEngagement, useShareSeries, useViewer } from '@/hooks'
+import { cn, formatCount, getCategoryLabel, interpolate } from '@/lib'
 import type { Series } from '@/types'
 import { ActionPill } from './ActionPill'
 import { OPEN_COMMENTS_EVENT } from './comments/CommentsSection'
 
 export function WatchInfo({ series, episode }: { series: Series; episode: number }) {
-    const { viewer, toggleSaved, toggleLiked } = useViewer()
+    const { viewer } = useViewer()
+    const { liked, saved, likeCount, toggleLike, toggleSave } = useEngagement(series.slug)
     const [expanded, setExpanded] = useState(false)
-    const saved = viewer.saved.includes(series.slug)
-    const liked = viewer.liked.includes(series.slug)
 
     const share = useShareSeries(series, episode)
 
@@ -27,13 +26,17 @@ export function WatchInfo({ series, episode }: { series: Series; episode: number
             </h1>
 
             <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted">
-                <span className="flex items-center gap-1.5">
-                    <Eye className="size-4" />
+                {series.views > 0 && (
+                    <span className="flex items-center gap-1.5">
+                        <Eye className="size-4" />
 
-                    {interpolate(WATCH.views, { count: formatCount(series.views) })}
+                        {interpolate(WATCH.views, { count: formatCount(series.views) })}
+                    </span>
+                )}
+
+                <span>
+                    <TimeAgo date={series.publishedAt} />
                 </span>
-
-                <span>{timeAgo(series.publishedAt, LABELS.timeAgo, CATALOG_UPDATED_AT)}</span>
 
                 <span className="flex items-center gap-1.5">
                     <Star className="size-4 fill-gold text-gold" />
@@ -59,7 +62,7 @@ export function WatchInfo({ series, episode }: { series: Series; episode: number
                         variant={saved ? 'secondary' : 'primary'}
                         className="ml-2"
                         startContent={saved ? <BookmarkCheck className="size-4" /> : <Bookmark className="size-4" />}
-                        onPress={() => toggleSaved(series.slug)}>
+                        onPress={toggleSave}>
                         {saved ? WATCH.following : WATCH.follow}
                     </Button>
                 </div>
@@ -68,9 +71,9 @@ export function WatchInfo({ series, episode }: { series: Series; episode: number
                     <ActionPill
                         label={WATCH.like}
                         active={liked}
-                        onClick={() => toggleLiked(series.slug)}
+                        onClick={toggleLike}
                         icon={<ThumbsUp className={cn('size-4', liked && 'fill-current')} />}>
-                        {formatCount(series.likes + (liked ? 1 : 0))}
+                        {formatCount(likeCount)}
                     </ActionPill>
 
                     <ActionPill

@@ -1,9 +1,9 @@
 'use client'
 
-import { usePathname } from 'next/navigation'
 import { type ReactNode, useEffect } from 'react'
 import { useReducedMotion } from 'framer-motion'
 import { ReactLenis, useLenis } from 'lenis/react'
+import { onNavigate } from '@/lib/on-navigate'
 
 export function SmoothScroll({ children }: { children: ReactNode }) {
     const reduce = useReducedMotion()
@@ -29,11 +29,16 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
 
 function ScrollReset() {
     const lenis = useLenis()
-    const pathname = usePathname()
 
     useEffect(() => {
-        lenis?.scrollTo(0, { immediate: true })
-    }, [lenis, pathname])
+        if (!lenis) return
+
+        const reset = () => lenis.scrollTo(0, { immediate: true })
+
+        reset()
+
+        return onNavigate(reset)
+    }, [lenis])
 
     return null
 }

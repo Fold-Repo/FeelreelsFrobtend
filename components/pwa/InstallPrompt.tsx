@@ -1,6 +1,5 @@
 'use client'
 
-import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { X } from 'lucide-react'
@@ -8,6 +7,7 @@ import { SITE } from '@/constants'
 import { INSTALL } from '@/data'
 import { isStandalone, useInstallPrompt } from '@/hooks'
 import { detectInstallGuide, EASE, type InstallGuide } from '@/lib'
+import { onNavigate } from '@/lib/on-navigate'
 import { LogoMark } from '../layout/Logo'
 import { Button } from '../ui'
 import { InstallSteps } from './InstallSteps'
@@ -28,7 +28,7 @@ const dismissedRecently = () => {
 }
 
 export function InstallPrompt() {
-    const pathname = usePathname() ?? ''
+    const [pathname, setPathname] = useState('')
     const { canInstall, install } = useInstallPrompt()
     const [guide, setGuide] = useState<InstallGuide | null>(null)
     const [eligible, setEligible] = useState(false)
@@ -36,6 +36,14 @@ export function InstallPrompt() {
     const [showSteps, setShowSteps] = useState(false)
     const canShow = eligible && !HIDDEN_ON.includes(pathname) && (canInstall || Boolean(guide))
     const name = SITE.name
+
+    useEffect(() => {
+        const readPath = () => setPathname(window.location.pathname)
+
+        readPath()
+
+        return onNavigate(readPath)
+    }, [])
 
     useEffect(() => {
         const id = window.setTimeout(() => {

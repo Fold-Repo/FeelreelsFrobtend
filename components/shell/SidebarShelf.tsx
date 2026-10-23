@@ -5,19 +5,20 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Play } from 'lucide-react'
 import { APP_SHELL } from '@/data'
-import { useViewer } from '@/hooks'
-import { ALL_SERIES, cn, getTopSeries, interpolate } from '@/lib'
+import { useCatalog, useViewer } from '@/hooks'
+import { cn, getTopSeries, interpolate } from '@/lib'
 
 export function SidebarShelf({ onNavigate }: { onNavigate?: () => void }) {
     const pathname = usePathname()
+    const { data: catalog = [] } = useCatalog()
     const { viewer } = useViewer()
     const watched = Object.entries(viewer.progress)
-        .map(([slug, episode]) => ({ series: ALL_SERIES.find((item) => item.slug === slug), episode }))
+        .map(([slug, episode]) => ({ series: catalog.find((item) => item.slug === slug), episode }))
         .filter((item) => item.series)
         .slice(-4)
         .reverse()
     const resuming = watched.length > 0
-    const items = resuming ? watched : getTopSeries(4).map((series) => ({ series, episode: 0 }))
+    const items = resuming ? watched : getTopSeries(catalog, 4).map((series) => ({ series, episode: 0 }))
 
     return (
         <div className="flex shrink-0 flex-col gap-1.5">

@@ -66,7 +66,8 @@ export function SeriesCard({ series, rank, priority, className }: SeriesCardProp
                 <h3 className="line-clamp-1 font-semibold tracking-[-0.01em]">{title}</h3>
 
                 <p className="mt-0.5 truncate text-sm text-muted">
-                    {getCategoryLabel(category)} · {interpolate(LABELS.views, { count: formatCount(views) })}
+                    {getCategoryLabel(category)}
+                    {views > 0 ? ` · ${interpolate(LABELS.views, { count: formatCount(views) })}` : ''}
                 </p>
             </div>
         </Link>

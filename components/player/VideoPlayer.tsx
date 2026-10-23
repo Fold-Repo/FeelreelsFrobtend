@@ -1,6 +1,6 @@
 'use client'
 
-import { type ReactNode, useMemo, useState } from 'react'
+import { type ReactNode, useEffect, useMemo, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { VolumeX } from 'lucide-react'
 import { PLAYER } from '@/data'
@@ -29,6 +29,7 @@ export type VideoPlayerProps = {
     mobileOverlay?: (progress: number) => ReactNode
     onTheater?: () => void
     onEnded?: () => void
+    onProgress?: (current: number, duration: number) => void
 }
 
 export function VideoPlayer({
@@ -45,6 +46,7 @@ export function VideoPlayer({
     mobileOverlay,
     onTheater,
     onEnded,
+    onProgress,
 }: VideoPlayerProps) {
     const { stageRef, videoProps, state, actions } = useVideoPlayer(src)
     const [captions, setCaptions] = useState(defaultCaptions)
@@ -52,6 +54,7 @@ export function VideoPlayer({
     const [endedFor, setEndedFor] = useState<string | null>(null)
     const [drawerOpen, setDrawerOpen] = useState(false)
     const ended = endedFor === src
+    const { current: position, duration } = state
     const chromeHidden = state.idle && state.playing && !drawerOpen
     const reel = Boolean(mobileOverlay)
 
@@ -77,6 +80,10 @@ export function VideoPlayer({
     )
 
     usePlayerShortcuts(shortcuts)
+
+    useEffect(() => {
+        if (duration > 0) onProgress?.(position, duration)
+    }, [onProgress, position, duration])
 
     return (
         <div

@@ -4,11 +4,12 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { LogoMark } from '@/components'
 import { HOME } from '@/data'
-import { ALL_SERIES, EASE } from '@/lib'
-
-const SERIES = ALL_SERIES[0]
+import { useCatalog } from '@/hooks'
+import { EASE } from '@/lib'
 
 export function NotificationCard() {
+    const { data: series = [] } = useCatalog()
+    const featured = series[0]
     const { app, time, title, text } = HOME.install.notification
 
     return (
@@ -33,7 +34,7 @@ export function NotificationCard() {
             </div>
 
             <span className="relative h-14 w-10 shrink-0 overflow-hidden rounded-lg">
-                <Image src={SERIES.poster} alt="" fill sizes="40px" className="object-cover" />
+                {featured && <Image src={featured.poster} alt="" fill sizes="40px" className="object-cover" />}
             </span>
         </motion.div>
     )

@@ -3,29 +3,45 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
+import { useQueryClient } from '@tanstack/react-query'
 import { motion } from 'framer-motion'
 import { Coins, Crown, Lock, Play } from 'lucide-react'
 import { WATCH } from '@/data'
-import { useToast, useViewer } from '@/hooks'
+import { useToast, useViewer, useWallet } from '@/hooks'
 import { EASE, interpolate } from '@/lib'
+import { ApiError, unlockEpisode } from '@/lib/api'
 import type { Episode, Series } from '@/types'
-import { AdBreakModal } from './AdBreakModal'
 import { UnlockOption } from './UnlockOption'
 
 export function LockedOverlay({ series, episode }: { series: Series; episode: Episode }) {
-    const { viewer, unlock, setVip } = useViewer()
-    const { showSuccess } = useToast()
-    const [adOpen, setAdOpen] = useState(false)
+    const client = useQueryClient()
+    const { viewer, unlock } = useViewer()
+    const { data: wallet } = useWallet()
+    const { showSuccess, showError, showInfo } = useToast()
+    const [pending, setPending] = useState(false)
     const labels = WATCH.locked
+    const coins = wallet?.coinBalance ?? viewer.tokens
+    const cost = episode.coinCost ?? 0
 
-    const payWithToken = () => {
-        unlock(series.slug, episode.number, true)
-        showSuccess(WATCH.toasts.unlockedToken)
+    const payWithCoins = async () => {
+        if (pending) return
+
+        setPending(true)
+
+        try {
+            await unlockEpisode(series.slug, episode.number, 'coins')
+            unlock(series.slug, episode.number)
+            await client.invalidateQueries({ queryKey: ['wallet'] })
+            showSuccess(WATCH.toasts.unlockedToken)
+        } catch (error) {
+            showError(error instanceof ApiError ? error.message : 'Could not unlock this episode.')
+        } finally {
+            setPending(false)
+        }
     }
 
     const goVip = () => {
-        setVip(true)
-        showSuccess(WATCH.toasts.vip)
+        showInfo('VIP is purchased from a signed-in account.')
     }
 
     return (
@@ -46,15 +62,15 @@ export function LockedOverlay({ series, episode }: { series: Series; episode: Ep
                 <p className="mt-1 hidden text-sm text-muted sm:block">{labels.text}</p>
 
                 <div className="mt-2 space-y-1.5 sm:mt-5 sm:space-y-2">
-                    <UnlockOption icon={<Play className="size-4 fill-current" />} title={labels.ad} tone="bg-blush" onClick={() => setAdOpen(true)} />
+                    <UnlockOption icon={<Play className="size-4 fill-current" />} title={labels.ad} tone="bg-blush" onClick={() => showInfo('Rewarded ads are not available on the web yet.')} />
 
                     <UnlockOption
                         icon={<Coins className="size-4" />}
                         title={labels.token}
-                        note={viewer.tokens ? interpolate(labels.tokenBalance, { count: viewer.tokens }) : labels.noTokens}
+                        note={coins ? interpolate(labels.tokenBalance, { count: coins }) : labels.noTokens}
                         tone="bg-butter"
-                        disabled={!viewer.tokens}
-                        onClick={payWithToken}
+                        disabled={pending || coins < cost}
+                        onClick={() => void payWithCoins()}
                     />
 
                     <UnlockOption icon={<Crown className="size-4" />} title={labels.vip} tone="bg-primary text-on-primary" onClick={goVip} />
@@ -66,15 +82,6 @@ export function LockedOverlay({ series, episode }: { series: Series; episode: Ep
                     </Link>
                 )}
             </motion.div>
-
-            <AdBreakModal
-                isOpen={adOpen}
-                onOpenChange={setAdOpen}
-                onComplete={() => {
-                    unlock(series.slug, episode.number)
-                    showSuccess(WATCH.toasts.unlockedAd)
-                }}
-            />
         </div>
     )
 }

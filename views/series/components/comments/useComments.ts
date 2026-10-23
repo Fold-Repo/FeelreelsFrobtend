@@ -26,19 +26,14 @@ export function useComments(series: Series) {
             replies: [],
         })
         const replies = (id: string) => mine.filter((comment) => comment.parent === id).map(toComment)
-        const samples: CommentData[] = copy.samples.map((sample) => ({
-            ...sample,
-            replies: [...sample.replies.map((reply) => ({ ...reply, replies: [] })), ...replies(sample.id)],
-        }))
         const own = mine.filter((comment) => !comment.parent).map((comment) => ({ ...toComment(comment), replies: replies(comment.id) }))
-        const ordered = sort === 'top' ? [...samples].sort((a, b) => Number(Boolean(b.pinned)) - Number(Boolean(a.pinned)) || b.likes - a.likes) : samples
 
-        return [...own, ...ordered]
+        return sort === 'top' ? own : [...own].reverse()
     }, [mine, name, handle, copy, sort])
 
     return {
         comments,
-        total: series.comments + mine.length,
+        total: mine.length,
         sort,
         setSort,
         author: { name, handle },

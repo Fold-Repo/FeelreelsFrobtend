@@ -15,6 +15,10 @@ export function interpolate(template: string, values: Record<string, string | nu
     return template.replace(/\{(\w+)\}/g, (_, key: string) => String(values[key] ?? ''))
 }
 
+export function todayStamp() {
+    return new Date().toISOString().slice(0, 10)
+}
+
 export function timeAgo(date: string, labels: { day: string; month: string; today: string }, now: string) {
     const days = Math.floor((Date.parse(now) - Date.parse(date)) / 86_400_000)
 

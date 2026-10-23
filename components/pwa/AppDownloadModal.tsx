@@ -3,24 +3,23 @@
 import Image from 'next/image'
 import { Star } from 'lucide-react'
 import { INSTALL } from '@/data'
-import { useAppDownload } from '@/hooks'
-import { ALL_SERIES } from '@/lib'
+import { useAppDownload, useCatalog } from '@/hooks'
 import { LogoMark } from '../layout/Logo'
 import { PopupModal } from '../ui'
 import { StoreBadge } from './StoreBadge'
 import { WebInstall } from './WebInstall'
 
-const POSTERS = ALL_SERIES.slice(0, 5)
-
 export function AppDownloadModal() {
     const { open, setOpen } = useAppDownload()
+    const { data: series = [] } = useCatalog()
+    const posters = series.slice(0, 5)
     const { store } = INSTALL
 
     return (
         <PopupModal isOpen={open} onOpenChange={setOpen} size="md" backdrop="blur" className="rounded-[2rem]" bodyClassName="p-0">
             <div className="relative h-36 overflow-hidden bg-night">
                 <div className="absolute inset-x-0 -bottom-8 flex justify-center gap-2">
-                    {POSTERS.map((series, index) => (
+                    {posters.map((series, index) => (
                         <div
                             key={series.slug}
                             className="relative h-36 w-24 shrink-0 overflow-hidden rounded-2xl"

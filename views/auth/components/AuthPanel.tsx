@@ -4,17 +4,19 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Logo } from '@/components'
 import { AUTH } from '@/data'
-import { ALL_SERIES, EASE } from '@/lib'
-
-const COLUMNS = [ALL_SERIES.slice(0, 6), ALL_SERIES.slice(6, 12), ALL_SERIES.slice(12, 18)]
+import { useCatalog } from '@/hooks'
+import { EASE } from '@/lib'
+import type { Series } from '@/types'
 
 export function AuthPanel() {
+    const { data: series = [] } = useCatalog()
+    const columns = posterColumns(series)
     const { title, text } = AUTH.panel
 
     return (
         <div className="relative hidden min-h-[40rem] overflow-hidden rounded-[1.6rem] bg-night lg:block lg:rounded-[2rem]">
             <div className="absolute inset-0 grid -rotate-6 grid-cols-3 gap-3 [mask-image:linear-gradient(to_bottom,black_30%,transparent_85%)] opacity-70">
-                {COLUMNS.map((column, index) => (
+                {columns.map((column, index) => (
                     <motion.div
                         key={index}
                         className="flex flex-col gap-3"
@@ -44,4 +46,13 @@ export function AuthPanel() {
             </motion.div>
         </div>
     )
+}
+
+function posterColumns(series: Series[]) {
+    if (!series.length) return []
+
+    const loop = [...series, ...series, ...series]
+    const size = Math.max(1, Math.ceil(loop.length / 3))
+
+    return [0, 1, 2].map((index) => loop.slice(index * size, (index + 1) * size))
 }

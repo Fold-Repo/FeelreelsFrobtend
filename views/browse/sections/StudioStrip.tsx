@@ -2,7 +2,8 @@
 
 import { ScrollRow } from '@/components'
 import { BROWSE } from '@/data'
-import { cn, STUDIOS } from '@/lib'
+import { useCatalog } from '@/hooks'
+import { cn, studiosFrom } from '@/lib'
 import { useBrowseQuery } from '../hooks'
 
 const TONES = [
@@ -15,12 +16,14 @@ const TONES = [
 ]
 
 export function StudioStrip() {
+    const { data: series = [] } = useCatalog()
+    const studios = studiosFrom(series)
     const { studio, update } = useBrowseQuery()
 
     return (
         <ScrollRow className="pt-4 pb-3 sm:pt-6 sm:pb-4" trackClassName="gap-3 sm:gap-5" activeKey={studio}>
             <div role="group" aria-label={BROWSE.studiosLabel} className="flex gap-3 sm:gap-5">
-                {STUDIOS.map((item, index) => {
+                {studios.map((item, index) => {
                     const active = item.name === studio
                     const initials = item.name
                         .split(' ')

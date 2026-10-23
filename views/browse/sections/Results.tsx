@@ -3,8 +3,8 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { Button, InfiniteScrollFooter, VideoCard } from '@/components'
 import { BROWSE } from '@/data'
-import { usePaginatedQuery, useViewer } from '@/hooks'
-import { EASE, interpolate, listSeries } from '@/lib'
+import { useCatalog, usePaginatedQuery, useViewer } from '@/hooks'
+import { EASE, interpolate, paginateSeries } from '@/lib'
 import { GridSkeleton } from '../components/GridSkeleton'
 import { useBrowseQuery } from '../hooks'
 
@@ -12,13 +12,16 @@ const GRID = 'grid gap-x-3 gap-y-5 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4
 
 export function Results() {
     const { category, studio, sort, q, list, filters, reset } = useBrowseQuery()
+    const catalog = useCatalog()
     const { viewer } = useViewer()
     const only = list === 'saved' ? viewer.saved : list === 'continue' ? Object.keys(viewer.progress) : undefined
     const key = [category, studio, sort, q, list, filters.join(','), only?.join(',')]
+    const all = catalog.data ?? []
 
     const { items, isPending, isError, hasMore, loadMore, loadingMore, data } = usePaginatedQuery({
-        queryKey: ['browse', ...key],
-        queryFn: (page) => listSeries({ category: category || undefined, studio: studio || undefined, sort, q, filters, only, page }),
+        queryKey: ['browse', catalog.dataUpdatedAt, ...key],
+        enabled: catalog.isSuccess,
+        queryFn: (page) => Promise.resolve(paginateSeries(all, { category: category || undefined, studio: studio || undefined, sort, q, filters, only, page })),
     })
 
     const total = data?.pages[0]?.totalItems ?? 0
@@ -36,7 +39,9 @@ export function Results() {
                 {!isPending && <p className="text-sm text-muted">{interpolate(BROWSE.results, { count: total })}</p>}
             </div>
 
-            {isPending ? (
+            {catalog.isError ? (
+                <p className="rounded-3xl bg-background py-20 text-center text-sm text-muted">The catalog could not be loaded.</p>
+            ) : catalog.isPending || isPending ? (
                 <GridSkeleton className={GRID} count={8} />
             ) : items.length ? (
                 <div className={GRID}>

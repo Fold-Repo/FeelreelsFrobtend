@@ -3,7 +3,7 @@
 import { FilterTabs } from '@/components'
 import { WATCH } from '@/data'
 import { useViewer } from '@/hooks'
-import { cn, interpolate } from '@/lib'
+import { cn, interpolate, isPlayable } from '@/lib'
 import type { Episode, Series } from '@/types'
 import { EpisodeTile } from './EpisodeTile'
 import { useEpisodeRanges } from './useEpisodeRanges'
@@ -18,7 +18,7 @@ type EpisodePanelProps = {
 }
 
 export function EpisodePanel({ series, episodes, current, onSelect, dark, className }: EpisodePanelProps) {
-    const { canWatch } = useViewer()
+    const { viewer } = useViewer()
     const { ranges, range, setRange, visible } = useEpisodeRanges(episodes, current)
 
     return (
@@ -51,7 +51,7 @@ export function EpisodePanel({ series, episodes, current, onSelect, dark, classN
                         key={episode.number}
                         episode={episode}
                         active={episode.number === current}
-                        locked={!canWatch(series, episode.number)}
+                        locked={!isPlayable(viewer, series.slug, episode)}
                         dark={dark}
                         onSelect={() => onSelect(episode.number)}
                     />

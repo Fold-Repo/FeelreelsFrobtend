@@ -2,14 +2,12 @@
 
 import { Bookmark, Heart, Share2 } from 'lucide-react'
 import { WATCH } from '@/data'
-import { useShareSeries, useViewer } from '@/hooks'
+import { useEngagement, useShareSeries } from '@/hooks'
 import { cn, formatCount } from '@/lib'
 import type { Series } from '@/types'
 
 export function PlayerRail({ series, episode }: { series: Series; episode: number }) {
-    const { viewer, toggleLiked, toggleSaved } = useViewer()
-    const liked = viewer.liked.includes(series.slug)
-    const saved = viewer.saved.includes(series.slug)
+    const { liked, saved, likeCount, toggleLike, toggleSave } = useEngagement(series.slug)
 
     const share = useShareSeries(series, episode)
 
@@ -17,11 +15,11 @@ export function PlayerRail({ series, episode }: { series: Series; episode: numbe
         {
             label: WATCH.like,
             active: liked,
-            onClick: () => toggleLiked(series.slug),
+            onClick: toggleLike,
             icon: <Heart className={cn('size-4', liked && 'fill-current')} />,
-            count: formatCount(series.likes + (liked ? 1 : 0)),
+            count: formatCount(likeCount),
         },
-        { label: WATCH.follow, active: saved, onClick: () => toggleSaved(series.slug), icon: <Bookmark className={cn('size-4', saved && 'fill-current')} /> },
+        { label: WATCH.follow, active: saved, onClick: toggleSave, icon: <Bookmark className={cn('size-4', saved && 'fill-current')} /> },
         { label: WATCH.share, active: false, onClick: share, icon: <Share2 className="size-4" /> },
     ]
 

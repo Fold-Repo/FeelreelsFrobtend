@@ -4,18 +4,18 @@ import { useSearchParams } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useViewer } from '@/hooks'
-import { cn, EASE, getEpisodes } from '@/lib'
-import type { Series } from '@/types'
+import { cn, EASE } from '@/lib'
+import type { Episode, Series } from '@/types'
 import { CommentsSection } from '../components/comments/CommentsSection'
 import { EpisodePanel } from '../components/EpisodePanel'
 import { Player } from '../components/Player'
 import { RelatedList } from '../components/RelatedList'
 import { WatchInfo } from '../components/WatchInfo'
 
-export function Watch({ series }: { series: Series }) {
-    const [episodes] = useState(() => getEpisodes(series))
+export function Watch({ series, episodes }: { series: Series; episodes: Episode[] }) {
     const params = useSearchParams()
-    const [current, setCurrent] = useState(() => Math.min(Math.max(Number(params.get('ep')) || 1, 1), series.episodes))
+    const total = Math.max(episodes.length, 1)
+    const [current, setCurrent] = useState(() => Math.min(Math.max(Number(params.get('ep')) || 1, 1), total))
     const [theater, setTheater] = useState(false)
     const { saveProgress } = useViewer()
 

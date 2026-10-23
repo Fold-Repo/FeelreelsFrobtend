@@ -2,7 +2,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Clock, Crown, Eye } from 'lucide-react'
 import { LABELS } from '@/constants'
-import { CATALOG_UPDATED_AT, cn, formatCount, getCategoryLabel, interpolate, timeAgo } from '@/lib'
+import { cn, formatCount, getCategoryLabel, interpolate } from '@/lib'
+import { TimeAgo } from './TimeAgo'
 import type { Series } from '@/types'
 
 type VideoCardProps = {
@@ -54,14 +55,16 @@ export function VideoCard({ series, layout = 'grid', priority }: VideoCardProps)
                         <span className="flex items-center gap-1">
                             <Clock className="size-3" />
 
-                            {timeAgo(publishedAt, LABELS.timeAgo, CATALOG_UPDATED_AT)}
+                            <TimeAgo date={publishedAt} />
                         </span>
 
-                        <span className="flex items-center gap-1">
-                            <Eye className="size-3" />
+                        {views > 0 && (
+                            <span className="flex items-center gap-1">
+                                <Eye className="size-3" />
 
-                            {formatCount(views)}
-                        </span>
+                                {formatCount(views)}
+                            </span>
+                        )}
                     </div>
                 )}
 
@@ -73,7 +76,8 @@ export function VideoCard({ series, layout = 'grid', priority }: VideoCardProps)
 
                 {row && (
                     <p className="mt-1 text-xs text-muted">
-                        {interpolate(LABELS.views, { count: formatCount(views) })} · {timeAgo(publishedAt, LABELS.timeAgo, CATALOG_UPDATED_AT)}
+                        {views > 0 ? `${interpolate(LABELS.views, { count: formatCount(views) })} · ` : ''}
+                        <TimeAgo date={publishedAt} />
                     </p>
                 )}
             </div>

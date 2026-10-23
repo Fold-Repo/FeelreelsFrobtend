@@ -1,17 +1,15 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
-import { ALL_SERIES, getSeries } from '@/lib'
+import { fetchMovie } from '@/lib/api'
 import { SeriesView } from '@/views'
 
-export function generateStaticParams() {
-    return ALL_SERIES.map((series) => ({ slug: series.slug }))
-}
-
 export async function generateMetadata({ params }: PageProps<'/series/[slug]'>): Promise<Metadata> {
-    const series = getSeries((await params).slug)
+    const loaded = await fetchMovie((await params).slug)
 
-    if (!series) return {}
+    if (!loaded) return {}
+
+    const { series } = loaded
 
     return {
         title: series.title,
@@ -31,9 +29,9 @@ export default function SeriesPage({ params }: PageProps<'/series/[slug]'>) {
 }
 
 async function SeriesContent({ params }: Pick<PageProps<'/series/[slug]'>, 'params'>) {
-    const series = getSeries((await params).slug)
+    const loaded = await fetchMovie((await params).slug)
 
-    if (!series) notFound()
+    if (!loaded) notFound()
 
-    return <SeriesView series={series} />
+    return <SeriesView series={loaded.series} episodes={loaded.episodes} />
 }

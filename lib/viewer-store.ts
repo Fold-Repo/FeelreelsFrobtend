@@ -6,7 +6,7 @@ const DEFAULT_VIEWER: Viewer = {
     guestId: '',
     user: null,
     vip: false,
-    tokens: 3,
+    tokens: 0,
     unlocked: {},
     progress: {},
     saved: [],

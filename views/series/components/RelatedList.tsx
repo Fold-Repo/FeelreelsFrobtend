@@ -3,11 +3,13 @@
 import { motion } from 'framer-motion'
 import { VideoCard } from '@/components'
 import { WATCH } from '@/data'
+import { useCatalog } from '@/hooks'
 import { EASE, getRelatedSeries } from '@/lib'
 import type { Series } from '@/types'
 
 export function RelatedList({ series }: { series: Series }) {
-    const items = getRelatedSeries(series, 10)
+    const { data: catalog = [] } = useCatalog()
+    const items = getRelatedSeries(catalog, series, 10)
 
     return (
         <aside

@@ -1,8 +1,13 @@
+'use client'
+
 import Image from 'next/image'
-import { ALL_SERIES } from '@/lib'
+import { useCatalog } from '@/hooks'
 
 export function PosterMarquee() {
-    const items = [...ALL_SERIES, ...ALL_SERIES]
+    const { data: series = [] } = useCatalog()
+    const items = series.length ? [...series, ...series] : []
+
+    if (!items.length) return null
 
     return (
         <div aria-hidden className="relative overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_10%,black_90%,transparent)] pb-6">

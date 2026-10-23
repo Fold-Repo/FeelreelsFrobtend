@@ -17,7 +17,7 @@ export function EpisodeTile({ episode, active, locked, dark, onSelect }: Episode
         <button
             type="button"
             onClick={onSelect}
-            aria-current={active}
+            aria-current={active ? 'true' : undefined}
             aria-label={interpolate(WATCH.episode, { number: episode.number })}
             className={cn(
                 'relative flex h-12 items-center justify-center rounded-xl text-sm font-medium tabular-nums transition-colors',

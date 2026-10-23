@@ -2,14 +2,15 @@
 
 import { FilterTabs } from '@/components'
 import { BROWSE } from '@/data'
-import { CATEGORIES } from '@/lib'
+import { useCatalog } from '@/hooks'
+import { categoriesFrom } from '@/lib'
 import { FilterMenu } from '../components/FilterMenu'
 import { SortSelect } from '../components/SortSelect'
 import { useBrowseQuery } from '../hooks'
 
-const OPTIONS = [{ label: BROWSE.all, value: '' }, ...CATEGORIES.map((category) => ({ label: category.label, value: category.slug }))]
-
 export function FilterBar() {
+    const { data: series = [] } = useCatalog()
+    const options = [{ label: BROWSE.all, value: '' }, ...categoriesFrom(series).map((category) => ({ label: category.label, value: category.slug }))]
     const { category, update } = useBrowseQuery()
 
     return (
@@ -17,7 +18,7 @@ export function FilterBar() {
             <FilterTabs
                 id="genre"
                 label={BROWSE.genresLabel}
-                options={OPTIONS}
+                options={options}
                 value={category}
                 onChange={(value) => update({ category: value })}
                 className="min-w-0 flex-1"

@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { Bookmark, Heart, Layers, MessageCircle, Play, Send } from 'lucide-react'
 import { WATCH } from '@/data'
-import { useShareSeries, useViewer } from '@/hooks'
+import { useEngagement, useShareSeries } from '@/hooks'
 import { cn, formatCount, interpolate } from '@/lib'
 import type { Episode, Series } from '@/types'
 import { OPEN_COMMENTS_EVENT } from './comments/CommentsSection'
@@ -20,12 +20,10 @@ type ReelOverlayProps = {
 }
 
 export function ReelOverlay({ series, episodes, current, progress, onSelect, onNext }: ReelOverlayProps) {
-    const { viewer, toggleLiked, toggleSaved } = useViewer()
+    const { liked, saved, likeCount, toggleLike, toggleSave } = useEngagement(series.slug)
     const [sheetOpen, setSheetOpen] = useState(false)
     const share = useShareSeries(series, current)
-    const liked = viewer.liked.includes(series.slug)
-    const saved = viewer.saved.includes(series.slug)
-    const { title, synopsis, tags, likes, comments } = series
+    const { title, synopsis, tags, comments } = series
     const copy = WATCH.reel
 
     return (
@@ -34,10 +32,10 @@ export function ReelOverlay({ series, episodes, current, progress, onSelect, onN
 
             <div className="pointer-events-auto absolute right-3 bottom-32 flex flex-col items-center gap-4 text-white">
                 <ReelAction
-                    label={formatCount(likes + (liked ? 1 : 0))}
+                    label={formatCount(likeCount)}
                     title={WATCH.like}
                     active={liked}
-                    onClick={() => toggleLiked(series.slug)}
+                    onClick={toggleLike}
                     icon={<Heart className={cn('size-5', liked && 'fill-accent text-accent')} />}
                 />
 
@@ -52,7 +50,7 @@ export function ReelOverlay({ series, episodes, current, progress, onSelect, onN
                     label={copy.save}
                     title={WATCH.follow}
                     active={saved}
-                    onClick={() => toggleSaved(series.slug)}
+                    onClick={toggleSave}
                     icon={<Bookmark className={cn('size-5', saved && 'fill-current')} />}
                 />
 
